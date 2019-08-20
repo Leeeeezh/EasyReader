@@ -1,20 +1,23 @@
 <template>
   <div id="app">
-    <div class="home">
-      <div id="read">hahaha</div>
-    </div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
   export default {}
   document.addEventListener('DOMContentLoaded', () => {
-    let font_size = window.innerWidth / 10
-    font_size = font_size > 50 ? 50 : font_size
-    document.querySelector('html').style.fontSize = font_size + 'px'
+    let fontSize = window.innerWidth / 10
+    fontSize = fontSize > 50 ? 50 : fontSize
+    document.querySelector('html').style.fontSize = fontSize + 'px'
   })
 
-</script lang="scss" scoped>
-@import "./assets/style/global"
+</script>
 <style lang="scss" scoped>
+  #app {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
 </style>
