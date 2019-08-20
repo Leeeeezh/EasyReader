@@ -1,3 +1,4 @@
 export default {
-  fileName: state => state.fileName
+  fileName: state => state.book.fileName,
+  menuVisibility: state => state.book.menuVisibility
 }
