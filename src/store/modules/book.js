@@ -7,6 +7,9 @@ export default {
   mutations: {
     'SET_FILENAME': (state, fileName) => {
       state.fileName = fileName
+    },
+    'SET_MENU_VISIBILITY': (state) => {
+      state.menuVisibility = !state.menuVisibility
     }
   }
 }

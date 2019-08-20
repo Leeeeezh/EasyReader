@@ -13,21 +13,23 @@
 
   export default {
     computed: {
-      ...mapGetters(['fileName'])
+      ...mapGetters(['fileName', 'menuVisibility'])
     },
     methods: {
       nextPage() {
         if (this.rendition) {
           this.rendition.next()
+          this.menuVisibility && this.toggleTitleAndMenu()
         }
       },
       prevPage() {
         if (this.rendition) {
           this.rendition.prev()
+          this.menuVisibility && this.toggleTitleAndMenu()
         }
       },
       toggleTitleAndMenu() {
-        console.log('??')
+        this.$store.dispatch('setMenuVisibility')
       },
       initEpub() {
         //  渲染图书
@@ -69,7 +71,8 @@
 </script>
 
 <style lang="scss" scoped>
-  .ebook-reader{
+  .ebook-reader {
     z-index: 0;
   }
+
 </style>
