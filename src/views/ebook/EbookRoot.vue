@@ -10,19 +10,12 @@
   </div>
 </template>
 <script>
-  import {
-    mapGetters
-  } from 'vuex'
   import EbookReader from '@/components/ebook/EbookReader.vue'
   import EbookTitle from '@/components/ebook/EbookTitle.vue'
   import EbookMenu from '@/components/ebook/EbookMenu.vue'
+  import mixin from '@/mixins/storeOperateMixin.js'
   export default {
-    computed: {
-      ...mapGetters(['menuVisibility'])
-    },
-    methods: {
-
-    },
+    mixins: [mixin],
     components: {
       EbookReader,
       EbookTitle,

@@ -4,9 +4,24 @@ export default {
   }, fileName) {
     return commit('SET_FILENAME', fileName)
   },
-  setMenuVisibility({
+  toggleMenuVisibility({
     commit
   }, menuVisibility) {
-    return commit('SET_MENU_VISIBILITY', menuVisibility)
+    return commit('TOGGLE_MENU_VISIBILITY')
+  },
+  toggleFontSizeSettingVisibility({
+    commit
+  }, fontSizeSettingVisibility) {
+    return commit('TOGGLE_FONTSIZE_SETTING_VISIBILITY')
+  },
+  setReadingBook({
+    commit
+  }, readingBook) {
+    return commit('SET_READING_BOOK', readingBook)
+  },
+  setDefaultFontSize({
+    commit
+  }, fontSize) {
+    return commit('SET_DEFAULT_FONT_SIZE', fontSize)
   }
 }

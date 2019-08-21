@@ -1,13 +1,15 @@
 <template>
-  <div class="ebook-menu">
+  <div class="ebook-menu" :class={noshadow:fontSizeSettingVisibility}>
     <div class="icon-wrapper"><span class="icon-menu"></span></div>
     <div class="icon-wrapper"><span class="icon-progress"></span></div>
     <div class="icon-wrapper"><span class="icon-bright"></span></div>
-    <div class="icon-wrapper"><span class="icon-A"></span></div>
+    <div class="icon-wrapper"><span class="icon-A" @click="toggleFontSizeSettingVisibility"></span></div>
   </div>
 </template>
 <script>
+  import mixin from '@/mixins/storeOperateMixin.js'
   export default {
+    mixins: [mixin],
     methods: {
 
     }
@@ -26,8 +28,10 @@
     background-color: $bg-white;
     z-index: 100;
     box-shadow: 0 0 18px $shadow;
+    transition: .3s ease-in-out;
 
     .icon-wrapper {
+      height: 100%;
       flex: 1;
       @include flex-center-row;
 

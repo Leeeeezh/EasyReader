@@ -23,7 +23,7 @@
     left: 0;
     width: 100%;
     height: 50px;
-    padding: 0 20px;
+    padding: 0 4px;
 
     font-size: $font-size-xl;
     font-weight: bold;
@@ -36,9 +36,15 @@
 
     .ebook-title-icons {
       @include flex-center-row;
+      height: 100%;
 
       .icon-wrapper {
-        margin: 0 8px;
+        padding: 0 8px;
+        height: 100%;
+
+        span{
+          line-height: 50px;
+        }
       }
     }
   }
