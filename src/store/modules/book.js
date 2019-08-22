@@ -1,11 +1,19 @@
-
 export default {
   state: {
     fileName: '',
     menuVisibility: true,
     fontSizeSettingVisibility: false,
+    fontFamilyList: ['daysOne', 'cabin', 'montserrat', 'tangerine'],
+    activatedFontFamily: 'daysOne',
     readingBook: null,
-    defaultFontSize: 18
+    defaultFontSize: 22,
+    settingVisibility: {
+      fontSize: false,
+      fontFamily: false,
+      theme: false,
+      Brightness: false,
+      catalog: false
+    }
   },
   mutations: {
     'SET_FILENAME': (state, fileName) => {
@@ -22,6 +30,17 @@ export default {
     },
     'SET_DEFAULT_FONT_SIZE': (state, fontSize) => {
       state.defaultFontSize = fontSize
+    },
+    'SET_SETTING_VISIBILITY': (state, {
+      setting,
+      visibility
+    }) => {
+      for (let i in setting) {
+        state.settingVisibility[setting[i]] = visibility[i]
+      }
+    },
+    'SET_ACTIVATED_FONT_FAMILY': (state, fontFamilyName) => {
+      state.activatedFontFamily = fontFamilyName
     }
   }
 }

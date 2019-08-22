@@ -1,9 +1,10 @@
 <template>
-  <div class="ebook-menu" :class={noshadow:fontSizeSettingVisibility}>
+  <div class="ebook-menu" :class={noshadow:settingVisibility.fontSize}>
     <div class="icon-wrapper"><span class="icon-menu"></span></div>
     <div class="icon-wrapper"><span class="icon-progress"></span></div>
     <div class="icon-wrapper"><span class="icon-bright"></span></div>
-    <div class="icon-wrapper"><span class="icon-A" @click="toggleFontSizeSettingVisibility"></span></div>
+    <div class="icon-wrapper"><span class="icon-A"
+        @click="setSettingVisibility({setting:['fontSize', 'fontFamily'],visibility:[!settingVisibility.fontSize,false]})"></span></div>
   </div>
 </template>
 <script>
