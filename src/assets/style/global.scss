@@ -11,14 +11,25 @@ $shadow:rgba(0, 0, 0, .1);
 $dark-shadow:rgba(0, 0, 0, .3);
 $bg-white: rgb(250, 250, 250);
 
-$font-size-xs: 8px;
-$font-size-sm: 12px;
-$font-size-md: 16px;
-$font-size-lg: 20px;
-$font-size-xl: 24px;
+$font-size-xs: px2rem(8);
+$font-size-sm: px2rem(12);
+$font-size-md: px2rem(16);
+$font-size-lg: px2rem(20);
+$font-size-xl: px2rem(24);
+$font-size-xxl: px2rem(26);
 
-.noshadow{
+$screen-margin: px2rem(10);
+
+$li-height: px2rem(50);
+$tab-height: px2rem(50);
+
+.noshadow {
   box-shadow: none;
+}
+
+.tapped {
+  background-color: $shadow;
+  color: $bg-white;
 }
 
 @mixin flex-center-row {
@@ -26,4 +37,78 @@ $font-size-xl: 24px;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+@mixin reader-menu-icon {
+  .icon-wrapper {
+    width: $tab-height;
+    height: $tab-height;
+    height: 100%;
+    flex: 1;
+    @include flex-center-row;
+    transition: all .1s ease-in-out;
+
+    span {
+      width: 100%;
+      height: 100%;
+      line-height: $tab-height;
+      text-align: center;
+      font-size: $font-size-lg;
+      transition: all .1s ease-in-out;
+
+      &:active {
+        transform: translateY(px2rem(2));
+      }
+    }
+
+    &:active {
+      background-color: $shadow;
+    }
+  }
+}
+
+@mixin panelPosition($name) {
+  .#{$name} {
+    position: absolute;
+    z-index: 10;
+
+    @if $name != catalog {
+      bottom: px2rem(50);
+    }
+
+    @if $name == catalog {
+      z-index: 30;
+      top: 0;
+    }
+
+    @if $name == more {
+      z-index: 30;
+      top: $tab-height;
+      right:0;
+    }
+  }
+}
+
+@mixin panelStyle($name, $axis, $bias) {
+
+  .#{$name}-enter,
+  .#{$name}-leave-to {
+    transform: translate#{$axis}($bias);
+    opacity: .6;
+  }
+
+  .#{$name}-enter-active,
+  .#{$name}-leave-active {
+    transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+  }
+
+  .#{$name}-leave,
+  .#{$name}-enter-to {
+    transform: translate#{$axis}(0);
+    opacity: 1;
+  }
 }

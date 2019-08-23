@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <div class="theme-setting">theme
+    <div class="catalog">Catalog
     </div>
   </div>
 </template>
@@ -14,9 +14,9 @@
 
 <style lang="scss" scoped>
   .wrap {
-    width: 100%;
-    height: px2rem(100);
-    background-color: yellow;
+    width: 60vw;
+    height: 100vh;
+    background-color: skyblue;
   }
 
 </style>

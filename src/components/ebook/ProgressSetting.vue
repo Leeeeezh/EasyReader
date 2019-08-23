@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <div class="theme-setting">theme
+    <div class="theme-setting">progress
     </div>
   </div>
 </template>
@@ -16,7 +16,7 @@
   .wrap {
     width: 100%;
     height: px2rem(100);
-    background-color: yellow;
+    background-color: palevioletred;
   }
 
 </style>

@@ -3,7 +3,7 @@
     <div class="font-size-setting">
       <span class="preview-sm">A</span>
       <div class="controller" ref="controller">
-        <div class="unit" v-for="(f,i) in fontsize" :key=i @touchend.self.capture="setFontSize($event, f)">
+        <div class="unit" v-for="(f,i) in fontsize" :key=i @click.self.capture="setFontSize($event, f)">
           <div class="hori-line" v-if="i!=0"></div>
           <div class="vert-line"></div>
           <div class="hori-line" v-if="i!=fontsize.length-1"></div>
@@ -13,8 +13,8 @@
       <span class="preview-lg">A</span>
     </div>
     <div class="link-wrap">
-      <div class="font-family-link" @click="setSettingVisibility({setting:['fontFamily'],visibility: [true]})">
-        <span class="link">Choose Font Family</span>
+      <div class="font-family-link" @click="setSettingVisibility('fontFamily')">
+        <span class="link">{{$t('message.fontFamily')}}</span>
         <span class="icon-forward"></span>
       </div>
     </div>
@@ -45,21 +45,19 @@
 
 <style lang="scss" scoped>
   .wrap {
-    z-index: 10;
     width: 100%;
+    height: px2rem(100);
     @include flex-center-row;
     flex-direction: column;
-    position: absolute;
-    bottom: 50px;
     background-color: $bg-white;
-    box-shadow: 0 0 18px $shadow;
+    box-shadow: 0 0 px2rem(18) $shadow;
 
     .font-size-setting {
       width: 100%;
       box-sizing: border-box;
       left: 0;
       height: 50px;
-      padding: 0 10px;
+      padding: 0 px2rem(10);
       @include flex-center-row;
       background-color: $bg-white;
 
@@ -70,11 +68,11 @@
 
       .preview-sm {
         @include flex-center-row;
-        font-size: 12px;
+        font-size: px2rem(16);
       }
 
       .preview-lg {
-        font-size: 24px;
+        font-size: px2rem(28);
       }
 
       .controller {
@@ -111,7 +109,7 @@
 
           .vert-line {
             width: 1px;
-            height: 10px;
+            height: px2rem(8);
             background-color: #ccc;
           }
         }
@@ -122,25 +120,30 @@
         height: 6px;
         border: 10px solid $bg-white;
         border-radius: 50%;
-        box-shadow: 0 0 6px $dark-shadow;
+        box-shadow: 0 0 px2rem(2) $dark-shadow;
         position: absolute;
         background-color: black;
+        transition: 0.2s ease-in-out;
       }
     }
 
     .link-wrap {
       width: 100%;
-      height: 40px;
+      height: px2rem(40);
       @include flex-center-row;
     }
 
     .font-family-link {
-      height: 16px;
-      padding: 4px;
-      font-size: 10px;
+      height: px2rem(16);
+      padding: px2rem(4) px2rem(8);
+      font-size: px2rem(10);
       @include flex-center-row;
       border: 1px solid $shadow;
-      border-radius: 11px;
+      border-radius: px2rem(14);
+      transition: all .1s ease-in-out;
+      &:active {
+        background-color: $shadow;
+      }
     }
   }
 

@@ -1,10 +1,17 @@
 <template>
   <div class="ebook-menu" :class={noshadow:settingVisibility.fontSize}>
-    <div class="icon-wrapper"><span class="icon-menu"></span></div>
-    <div class="icon-wrapper"><span class="icon-progress"></span></div>
-    <div class="icon-wrapper"><span class="icon-bright"></span></div>
-    <div class="icon-wrapper"><span class="icon-A"
-        @click="setSettingVisibility({setting:['fontSize', 'fontFamily'],visibility:[!settingVisibility.fontSize,false]})"></span></div>
+    <div class="icon-wrapper">
+      <span class="icon-menu" @click="setSettingVisibility('catalog');toggleMenuVisibility()"></span>
+    </div>
+    <div class="icon-wrapper">
+      <span class="icon-progress" @click="setSettingVisibility('progress')"></span>
+    </div>
+    <div class="icon-wrapper">
+      <span class="icon-bright" @click="setSettingVisibility('theme')"></span>
+    </div>
+    <div class="icon-wrapper">
+      <span class="icon-A" @click="setSettingVisibility('fontSize')"></span>
+    </div>
   </div>
 </template>
 <script>
@@ -19,28 +26,15 @@
 </script>
 <style lang="scss" scoped>
   .ebook-menu {
-    position: absolute;
-    bottom: 0;
-    left: 0;
     width: 100%;
-    height: 50px;
+    height: px2rem(50);
     @include flex-center-row;
     font-size: $font-size-sm;
     background-color: $bg-white;
-    z-index: 100;
-    box-shadow: 0 0 18px $shadow;
+    box-shadow: 0 0 px2rem(18) $shadow;
     transition: .3s ease-in-out;
 
-    .icon-wrapper {
-      height: 100%;
-      flex: 1;
-      @include flex-center-row;
-
-      [class^="icon"] {
-        font-size: $font-size-lg;
-        font-weight: bold;
-      }
-    }
+    @include reader-menu-icon;
   }
 
 </style>

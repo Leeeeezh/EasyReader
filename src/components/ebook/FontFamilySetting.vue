@@ -1,9 +1,9 @@
 <template>
-  <div class="font-family-setting">
-    <div class="wrapper">
+  <div class="wrap">
+    <div class="font-family-setting">
       <div class="title">
-        <span class="icon-down2" @click.self="setSettingVisibility({setting:['fontFamily'],visibility:[false]})"></span>
-        <p>Font Family</p>
+        <span class="icon-down2" @click.self="setSettingVisibility('fontFamily')"></span>
+        <p>{{$t('message.fontFamily')}}</p>
       </div>
       <div class="list">
         <ul>
@@ -34,32 +34,30 @@
 </script>
 
 <style lang="scss" scoped>
-  .font-family-setting {
-    box-shadow: 0 0 18px $shadow;
+  .wrap {
+    box-shadow: 0 0 px2rem(18) $shadow;
     box-sizing: border-box;
-    position: absolute;
-    bottom: 50px;
     width: 100%;
-    z-index: 15;
     background-color: $bg-white;
-    max-height: 400px;
+    max-height: px2rem(400);
 
     .title {
       border-bottom: 1px solid $shadow;
       font-size: $font-size-lg;
       text-align: center;
-      line-height: 40px;
-      height: 40px;
+      line-height: $li-height;
+      height: $li-height;
       position: relative;
 
       .icon-down2 {
         position: absolute;
         right: 0;
         top: 50%;
-        width: 40px;
-        height: 40px;
+        width: $li-height;
+        height: $li-height;
         transform: translateY(-50%);
-        line-height: 40px;
+        line-height: $li-height;
+        font-weight: bold;
       }
     }
 
@@ -68,9 +66,11 @@
       justify-content: space-between;
       font-size: $font-size-md;
       text-align: center;
-      line-height: 30px;
-      height: 30px;
+      line-height: $li-height;
+      height: $li-height;
       transition: all .2s;
+      @include flex-center-row;
+      justify-content: space-between;
 
       &.checked {
         color: $font-color;
@@ -79,12 +79,17 @@
       }
 
       span {
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
+        width: $font-size-xxl;
+        height: $font-size-xxl;
+        line-height: $font-size-xxl;
 
         &:first-child {
-          padding-left: 10px;
+          padding-left: $screen-margin;
+        }
+
+        &:last-child {
+          font-size: $font-size-lg;
+          padding-right: $screen-margin;
         }
       }
     }

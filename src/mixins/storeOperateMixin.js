@@ -10,10 +10,7 @@ export default {
   methods: {
     ...mapActions(['setFileName', 'toggleMenuVisibility', 'toggleFontSizeSettingVisibility', 'setReadingBook', 'setDefaultFontSize', 'setSettingVisibility', 'setActivatedFontFamily']),
     hideAllSettings() {
-      this.setSettingVisibility({
-        setting: ['fontSize', 'fontFamily'],
-        visibility: [false, false]
-      })
+      this.setSettingVisibility('all')
     }
   }
 }

@@ -1,16 +1,22 @@
 <template>
   <div class="ebook-title">
-    <div class="icon-wrapper"><span class="icon-back"></span></div>
+    <div class="back">
+      <div class="icon-wrapper"><span class="icon-back"></span></div>
+    </div>
     <div class="ebook-title-icons">
       <div class="icon-wrapper"><span class="icon-shelf"></span></div>
       <div class="icon-wrapper"><span class="icon-cart"></span></div>
-      <div class="icon-wrapper"><span class="icon-more"></span></div>
+      <div class="icon-wrapper"><span class="icon-more" @click="setSettingVisibility('more')"></span></div>
     </div>
   </div>
 </template>
 <script>
+  import mixin from '@/mixins/storeOperateMixin.js'
   export default {
+    mixins: [mixin],
+    methods: {
 
+    }
   }
 
 </script>
@@ -18,34 +24,19 @@
 <style lang="scss" scoped>
   .ebook-title {
     box-sizing: border-box;
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 50px;
-    padding: 0 4px;
-
+    height: px2rem(50);
     font-size: $font-size-xl;
     font-weight: bold;
     background-color: $bg-white;
-    z-index: 100;
-    box-shadow: 0 0 18px $shadow;
-
+    box-shadow: 0 0 px2rem(18) $shadow;
     @include flex-center-row;
+    @include reader-menu-icon;
     justify-content: space-between;
 
     .ebook-title-icons {
       @include flex-center-row;
       height: 100%;
-
-      .icon-wrapper {
-        padding: 0 8px;
-        height: 100%;
-
-        span{
-          line-height: 50px;
-        }
-      }
     }
   }
 

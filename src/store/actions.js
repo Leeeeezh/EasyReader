@@ -31,17 +31,13 @@ export default {
 
   setSettingVisibility({
     commit
-  }, {
-    setting,
-    visibility
-  }) {
-    return commit('SET_SETTING_VISIBILITY', {
-      setting,
-      visibility
-    })
+  }, setting) {
+    return commit('SET_SETTING_VISIBILITY', setting)
   },
 
-  setActivatedFontFamily({commit},fontFamily) {
+  setActivatedFontFamily({
+    commit
+  }, fontFamily) {
     return commit('SET_ACTIVATED_FONT_FAMILY', fontFamily)
   }
 }

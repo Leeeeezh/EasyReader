@@ -1,11 +1,14 @@
 <template>
   <div class="ebook">
+
     <transition name="title-animation">
-      <EbookTitle v-show="menuVisibility" />
+      <EbookTitle class="ebook-title" v-show="menuVisibility" />
     </transition>
+
     <transition name="menu-animation">
-      <EbookMenu v-show="menuVisibility" />
+      <EbookMenu class="ebook-menu" v-show="menuVisibility" />
     </transition>
+
     <EbookReader />
   </div>
 </template>
@@ -29,6 +32,18 @@
   .book {
     position: relative;
   }
+  .ebook-title{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 40;
+  }
+  .ebook-menu{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 40;
+  }
 
   .title-animation-enter,
   .title-animation-leave-to {
@@ -37,7 +52,7 @@
 
   .title-animation-enter-active,
   .title-animation-leave-active {
-    transition: .3s ease-in-out;
+    transition: .3s cubic-bezier(0.5, 1.2, 0.75, 1.2);
   }
 
   .title-animation-leave,
@@ -52,7 +67,7 @@
 
   .menu-animation-enter-active,
   .menu-animation-leave-active {
-    transition: .3s ease-in-out;
+    transition: .3s cubic-bezier(0.5, 1.2, 0.75, 1.2);
   }
 
   .menu-animation-leave,

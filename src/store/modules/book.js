@@ -1,5 +1,6 @@
 export default {
   state: {
+    language: 'en',
     fileName: '',
     menuVisibility: true,
     fontSizeSettingVisibility: false,
@@ -11,8 +12,9 @@ export default {
       fontSize: false,
       fontFamily: false,
       theme: false,
-      Brightness: false,
-      catalog: false
+      catalog: false,
+      progress: false,
+      more: false
     }
   },
   mutations: {
@@ -31,12 +33,25 @@ export default {
     'SET_DEFAULT_FONT_SIZE': (state, fontSize) => {
       state.defaultFontSize = fontSize
     },
-    'SET_SETTING_VISIBILITY': (state, {
-      setting,
-      visibility
-    }) => {
-      for (let i in setting) {
-        state.settingVisibility[setting[i]] = visibility[i]
+    // 'SET_SETTING_VISIBILITY': (state, {
+    //   setting,
+    //   visibility
+    // }) => {
+    //   for (let i in setting) {
+    //     state.settingVisibility[setting[i]] = visibility[i]
+    //   }
+    // },
+    'SET_SETTING_VISIBILITY': (state, setting) => {
+      for (let s of Object.keys(state.settingVisibility)) {
+        if (s === setting) {
+          state.settingVisibility[s] = !state.settingVisibility[s]
+        } else {
+          if (setting !== 'fontFamily' || setting === 'all') {
+            state.settingVisibility[s] = false
+          } else if (s === 'fontSize') {
+            state.settingVisibility[s] = true
+          }
+        }
       }
     },
     'SET_ACTIVATED_FONT_FAMILY': (state, fontFamilyName) => {
