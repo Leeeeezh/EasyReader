@@ -7,7 +7,15 @@ export default {
     fontFamilyList: ['daysOne', 'cabin', 'montserrat', 'tangerine'],
     activatedFontFamily: 'daysOne',
     readingBook: null,
+    progress: 10,
     defaultFontSize: 22,
+    themeList: [
+      'default',
+      'dark',
+      'jungle',
+      'autumn'
+    ],
+    activatedTheme: 'default',
     settingVisibility: {
       fontSize: false,
       fontFamily: false,
@@ -18,6 +26,9 @@ export default {
     }
   },
   mutations: {
+    'SET_PROGRESS': (state, progress) => {
+      state.progress = progress
+    },
     'SET_FILENAME': (state, fileName) => {
       state.fileName = fileName
     },
@@ -33,14 +44,6 @@ export default {
     'SET_DEFAULT_FONT_SIZE': (state, fontSize) => {
       state.defaultFontSize = fontSize
     },
-    // 'SET_SETTING_VISIBILITY': (state, {
-    //   setting,
-    //   visibility
-    // }) => {
-    //   for (let i in setting) {
-    //     state.settingVisibility[setting[i]] = visibility[i]
-    //   }
-    // },
     'SET_SETTING_VISIBILITY': (state, setting) => {
       for (let s of Object.keys(state.settingVisibility)) {
         if (s === setting) {
@@ -56,6 +59,9 @@ export default {
     },
     'SET_ACTIVATED_FONT_FAMILY': (state, fontFamilyName) => {
       state.activatedFontFamily = fontFamilyName
+    },
+    'SET_ACTIVATED_THEME': (state, theme) => {
+      state.activatedTheme = theme
     }
   }
 }

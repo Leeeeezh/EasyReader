@@ -1,16 +1,19 @@
 <template>
-  <div class="wrap">
+  <div class="wrap" :class="activatedTheme">
+    <div class="title">
+      字号
+    </div>
     <div class="font-size-setting">
       <span class="preview-sm">A</span>
       <div class="controller" ref="controller">
-        <div class="unit" v-for="(f,i) in fontsize" :key=i @click.self.capture="setFontSize($event, f)">
-          <div class="hori-line" v-if="i!=0"></div>
-          <div class="vert-line"></div>
-          <div class="hori-line" v-if="i!=fontsize.length-1"></div>
+        <div class="controller"><input type="range" @change="setFontSize($event)" @input="setFontSize($event)" :value="defaultFontSize" min="16"
+            max="28" step="2">
         </div>
       </div>
-      <div class="dot" ref="dot" :style="{left:dotLeft}"></div>
       <span class="preview-lg">A</span>
+    </div>
+    <div class="value">
+      <span>{{defaultFontSize}}</span>
     </div>
     <div class="link-wrap">
       <div class="font-family-link" @click="setSettingVisibility('fontFamily')">
@@ -27,16 +30,19 @@
     mixins: [mixin],
     data() {
       return {
-        fontsize: [16, 18, 20, 22, 24, 26, 28],
+        fontSize: 22,
+        fontSizeList: [16, 18, 20, 22, 24, 26, 28],
         dotLeft: localStorage.getItem('dotLeft') ? localStorage.getItem('dotLeft') : window.innerWidth / 2 - 13 + 'px'
       }
     },
     methods: {
-      setFontSize(evt, f) {
-        this.$emit('setfontsize', f)
-        this.dotLeft = `${evt.target.offsetLeft + evt.target.offsetWidth / 2 - 13}px`
-        localStorage.setItem('fontSize', f)
-        localStorage.setItem('dotLeft', this.dotLeft)
+      setFontSize({
+        target: {
+          value
+        }
+      }) {
+        localStorage.setItem('fontSize', value)
+        this.$emit('setfontsize', value)
       }
     }
   }
@@ -46,11 +52,26 @@
 <style lang="scss" scoped>
   .wrap {
     width: 100%;
-    height: px2rem(100);
     @include flex-center-row;
     flex-direction: column;
     background-color: $bg-white;
     box-shadow: 0 0 px2rem(18) $shadow;
+
+    .title {
+      font-size: $font-size-lg;
+      text-align: center;
+      line-height: $li-height;
+      width: 100%;
+      height: $li-height;
+      position: relative;
+    }
+
+    .value {
+      font-size: $font-size-md;
+      width: 100%;
+      padding: px2rem(10) 0;
+      @include flex-center-row;
+    }
 
     .font-size-setting {
       width: 100%;
@@ -59,7 +80,7 @@
       height: 50px;
       padding: 0 px2rem(10);
       @include flex-center-row;
-      background-color: $bg-white;
+      // background-color: $bg-white;
 
       [class^="preview"] {
         text-align: center;
@@ -76,54 +97,28 @@
       }
 
       .controller {
-        @include flex-center-row;
+        @include flex-center-col;
         flex: 1 0;
         height: 100%;
 
-        .unit {
-          flex: 1 0;
-          height: 100%;
-          @include flex-center-row;
-
-          &:first-child {
-            justify-content: flex-end;
-
-            .hori-line:first-child {
-              visibility: hidden;
-            }
-          }
-
-          &:last-child {
-            justify-content: flex-start !important;
-
-            .hori-line:last-child {
-              visibility: hidden;
-            }
-          }
-
-          .hori-line {
-            width: 50%;
-            height: 1px;
-            background-color: #ccc;
-          }
-
-          .vert-line {
-            width: 1px;
-            height: px2rem(8);
-            background-color: #ccc;
-          }
+        input {
+          display: block;
+          -webkit-appearance: none;
+          width: 80vw;
+          height: px2rem(2);
+          background: #ccc;
+          outline: none;
+          border-radius: px2rem(2)
         }
-      }
 
-      .dot {
-        width: 6px;
-        height: 6px;
-        border: 10px solid $bg-white;
-        border-radius: 50%;
-        box-shadow: 0 0 px2rem(2) $dark-shadow;
-        position: absolute;
-        background-color: black;
-        transition: 0.2s ease-in-out;
+        input[type=range]::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          display: block;
+          height: 18px;
+          width: 18px;
+          border-radius: 50%;
+          box-shadow: 0 0 6px rgba(0, 0, 0, .2);
+        }
       }
     }
 
@@ -138,12 +133,7 @@
       padding: px2rem(4) px2rem(8);
       font-size: px2rem(10);
       @include flex-center-row;
-      border: 1px solid $shadow;
       border-radius: px2rem(14);
-      transition: all .1s ease-in-out;
-      &:active {
-        background-color: $shadow;
-      }
     }
   }
 

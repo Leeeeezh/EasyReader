@@ -6,7 +6,7 @@ $ratio:375/10;
   @return $px / $ratio+rem
 }
 
-$font-color: #333;
+$font-color: rgba(51, 51, 51, .7);
 $shadow:rgba(0, 0, 0, .1);
 $dark-shadow:rgba(0, 0, 0, .3);
 $bg-white: rgb(250, 250, 250);
@@ -32,6 +32,139 @@ $tab-height: px2rem(50);
   color: $bg-white;
 }
 
+.wrap {
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+}
+
+.default {
+  background-color: rgb(243, 243, 243);
+  color: black;
+
+  .checkd {
+    color: $font-color;
+    background-color: $shadow;
+  }
+
+  .dot {
+    border: 10px solid $bg-white;
+    background-color: black;
+  }
+
+  .font-family-link {
+    border: 1px solid $font-color;
+  }
+
+  .title {
+    border-bottom: 1px solid $shadow;
+  }
+
+  input{
+    background: $shadow;
+    background-size: 50% 100%;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    background: black;
+    border: 6px solid $bg-white;
+  }
+}
+
+.dark {
+  background-color: black;
+  color: #999;
+
+  .checked {
+    background-color: rgba(255, 255, 255, .1);
+    color: #999;
+  }
+
+  .dot {
+    border: 10px solid #999;
+    background-color: black;
+  }
+
+  .font-family-link {
+    border: 1px solid #999;
+  }
+
+  .title {
+    border-bottom: 1px solid #999;
+  }
+  input{
+    background: #999;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    background: black;
+    border: 6px solid #999;
+  }
+}
+
+.jungle {
+  background-color: darkslategrey;
+  color: cadetblue;
+
+  .checked {
+    color: cadetblue;
+    background-color: $shadow;
+  }
+
+  .dot {
+    border: 10px solid cadetblue;
+    background-color: darkslategrey;
+  }
+
+  .font-family-link {
+    border: 1px solid cadetblue;
+  }
+
+  .title {
+    border-bottom: 1px solid cadetblue;
+  }
+  input{
+    background: cadetblue;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    background: darkslategrey;
+    border: 6px solid cadetblue;
+  }
+}
+
+.autumn {
+  background-color: rgb(211, 121, 42);
+  color: burlywood;
+
+  .checked {
+    color: burlywood;
+    background-color: $shadow;
+  }
+
+  .dot {
+    border: 10px solid burlywood;
+    background-color: rgb(211, 121, 42);
+  }
+
+  .font-family-link {
+    border: 1px solid burlywood;
+  }
+
+  .title {
+    border-bottom: 1px solid burlywood;
+  }
+  input{
+    background: burlywood;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    background: rgb(211, 121, 42);
+    border: 6px solid burlywood;
+  }
+}
+
+.dot {
+  box-shadow: 0 0 6px rgba(0, 0, 0, .2);
+}
+
+
+
 @mixin flex-center-row {
   display: flex;
   flex-direction: row;
@@ -39,6 +172,14 @@ $tab-height: px2rem(50);
   justify-content: center;
 }
 
+@mixin flex-center-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+// 阅读界面图标
 @mixin reader-menu-icon {
   .icon-wrapper {
     width: $tab-height;
@@ -67,28 +208,30 @@ $tab-height: px2rem(50);
   }
 }
 
+// 阅读界面设置面板位置
 @mixin panelPosition($name) {
   .#{$name} {
     position: absolute;
     z-index: 10;
 
-    @if $name != catalog {
+    @if $name !=catalog {
       bottom: px2rem(50);
     }
 
-    @if $name == catalog {
+    @if $name==catalog {
       z-index: 30;
       top: 0;
     }
 
-    @if $name == more {
+    @if $name==more {
       z-index: 30;
       top: $tab-height;
-      right:0;
+      right: 0;
     }
   }
 }
 
+//  阅读界面设置面板样式
 @mixin panelStyle($name, $axis, $bias) {
 
   .#{$name}-enter,

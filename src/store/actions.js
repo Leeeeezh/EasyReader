@@ -1,4 +1,9 @@
 export default {
+  setProgress({
+    commit
+  }, progress) {
+    return commit('SET_PROGRESS', progress)
+  },
   setFileName({
     commit
   }, fileName) {
@@ -39,5 +44,10 @@ export default {
     commit
   }, fontFamily) {
     return commit('SET_ACTIVATED_FONT_FAMILY', fontFamily)
+  },
+  setActivatedTheme({
+    commit
+  }, theme) {
+    return commit('SET_ACTIVATED_THEME', theme)
   }
 }

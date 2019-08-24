@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="wrap" :class="activatedTheme">
     <div class="font-family-setting">
       <div class="title">
         <span class="icon-down2" @click.self="setSettingVisibility('fontFamily')"></span>
@@ -42,7 +42,6 @@
     max-height: px2rem(400);
 
     .title {
-      border-bottom: 1px solid $shadow;
       font-size: $font-size-lg;
       text-align: center;
       line-height: $li-height;
@@ -73,8 +72,8 @@
       justify-content: space-between;
 
       &.checked {
-        color: $font-color;
-        background-color: $shadow;
+        // color: $font-color;
+        // background-color: $shadow;
         font-weight: bold;
       }
 

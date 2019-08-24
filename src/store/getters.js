@@ -6,5 +6,8 @@ export default {
   defaultFontSize: state => state.book.defaultFontSize,
   settingVisibility: state => state.book.settingVisibility,
   fontFamilyList: state => state.book.fontFamilyList,
-  activatedFontFamily: state => state.book.activatedFontFamily
+  activatedFontFamily: state => state.book.activatedFontFamily,
+  activatedTheme: state => state.book.activatedTheme,
+  themeList: state => state.book.themeList,
+  progress: state => state.book.progress
 }

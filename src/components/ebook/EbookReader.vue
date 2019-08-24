@@ -14,11 +14,11 @@
     </transition>
 
     <transition name="theme-setting">
-      <ThemeSetting class="theme-setting" v-show="settingVisibility.theme" />
+      <ThemeSetting class="theme-setting" v-show="settingVisibility.theme" @settheme="setTheme" />
     </transition>
 
     <transition name="progress-setting">
-      <ProgressSetting class="progress-setting" v-show="settingVisibility.progress" />
+      <ProgressSetting class="progress-setting" v-show="settingVisibility.progress" @setprogress="onProgressChange" />
     </transition>
 
     <transition name="catalog">
@@ -44,6 +44,48 @@
 
   export default {
     mixins: [mixin],
+    data() {
+      return {
+        bookName: this.$route.params.fileName,
+        bookThemeList: [{
+            name: 'default',
+            style: {
+              body: {
+                'color': '#555',
+                'background': 'rgb(243, 243, 243)'
+              }
+            }
+          },
+          {
+            name: 'dark',
+            style: {
+              body: {
+                'color': '#999',
+                'background': 'black'
+              }
+            }
+          },
+          {
+            name: 'jungle',
+            style: {
+              body: {
+                'color': 'cadetblue',
+                'background': 'darkslategrey'
+              }
+            }
+          },
+          {
+            name: 'autumn',
+            style: {
+              body: {
+                'color': 'burlywood',
+                'background': 'rgb(211, 121, 42)'
+              }
+            }
+          }
+        ]
+      }
+    },
     components: {
       FontSizeSetting,
       FontFamilySetting,
@@ -53,6 +95,16 @@
       More
     },
     methods: {
+      onProgressChange(progress) {
+        this.setProgress(progress)
+        let percentage = progress / 100
+        //  epubjs通过locations对象的cfiFromPercentage定位阅读进度,将产生的location定位对象传入rendition对象的display方法显示对应进度的内容
+        let location = percentage > 0 ? this.locations.cfiFromPercentage(percentage) : 0
+        this.rendition.display(location)
+      },
+      setTheme(t) {
+        this.rendition.themes.select(t)
+      },
       setFontSize(f) {
         this.rendition.themes.fontSize(`${f}px`)
         this.setDefaultFontSize(f)
@@ -93,6 +145,10 @@
           contents.addStylesheet(`${process.env.VUE_APP_RES_URL}fonts/montserrat.css`)
           contents.addStylesheet(`${process.env.VUE_APP_RES_URL}fonts/tangerine.css`)
         })
+        //  注册主题样式
+        this.bookThemeList.forEach(theme => {
+          this.rendition.themes.register(theme.name, theme.style)
+        })
         //  读取字号缓存,若无则使用默认字号
         let localFontSize = localStorage.getItem('fontSize')
         if (localFontSize) {
@@ -100,6 +156,16 @@
           this.setFontSize(+localFontSize)
         } else {
           this.rendition.themes.fontSize(this.defaultFontSize + 'px')
+        }
+
+        //  读取主题缓存, 若无则使用默认主题
+        let theme = localStorage.getItem('theme')
+        if (theme) {
+          this.rendition.themes.select(theme)
+          this.setActivatedTheme(theme)
+        } else {
+          this.rendition.themes.select('default')
+          this.setActivatedTheme('default')
         }
         //  读取字体缓存,若无则使用默认字体
         let localFontFamily = localStorage.getItem('fontFamily')
@@ -110,6 +176,21 @@
         } else {
           this.rendition.themes.font(this.activatedFontFamily)
         }
+        //  加载进度,locations对象默认不生成,需要手动生成
+        this.book.ready.then(() => {
+          return this.book.locations.generate()
+        }).then(result => {
+          this.locations = this.book.locations
+          //  检查该图书是否有进度缓存,有则加载
+          let progress = localStorage.getItem('progress')
+          if (progress) {
+            let progressObj = JSON.parse(progress)
+            if (progressObj[this.bookName]) {
+              this.onProgressChange(+progressObj[this.bookName])
+            }
+          }
+        })
+
         //  显示图书
         this.rendition.display()
         //  绑定翻页手势事件监听
@@ -127,6 +208,7 @@
           } else {
             this.toggleTitleAndMenu()
             this.hideAllSettings()
+            navigator.vibrate(1000)
           }
         }, {
           passive: false
@@ -148,6 +230,7 @@
   .ebook-reader {
     z-index: 0;
   }
+
   @include panelPosition(font-size-setting);
   @include panelPosition(font-family-setting);
   @include panelPosition(theme-setting);
