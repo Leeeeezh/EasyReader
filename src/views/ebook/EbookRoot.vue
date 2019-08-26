@@ -16,9 +16,13 @@
   import EbookReader from '@/components/ebook/EbookReader.vue'
   import EbookTitle from '@/components/ebook/EbookTitle.vue'
   import EbookMenu from '@/components/ebook/EbookMenu.vue'
-  import mixin from '@/mixins/storeOperateMixin.js'
+  import {
+    mapGetters
+  } from 'vuex'
   export default {
-    mixins: [mixin],
+    computed: {
+      ...mapGetters(['menuVisibility'])
+    },
     components: {
       EbookReader,
       EbookTitle,
@@ -32,13 +36,15 @@
   .book {
     position: relative;
   }
-  .ebook-title{
+
+  .ebook-title {
     position: absolute;
     top: 0;
     left: 0;
     z-index: 40;
   }
-  .ebook-menu{
+
+  .ebook-menu {
     position: absolute;
     bottom: 0;
     left: 0;

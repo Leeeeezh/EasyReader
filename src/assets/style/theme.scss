@@ -1,0 +1,148 @@
+.default {
+  background-color: rgb(243, 243, 243);
+  color: black;
+
+  .checkd {
+    color: $font-color;
+    background-color: $shadow;
+  }
+
+  .font-family-link {
+    border: 1px solid $font-color;
+  }
+
+  .title {
+    border-bottom: 1px solid $shadow;
+  }
+
+  input {
+    background: $shadow;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    background: black;
+    border: 6px solid $bg-white;
+  }
+
+  .btns {
+    font-weight: bold;
+    .deactive {
+      background-color: #999;
+      color: black;
+      font-weight: normal;
+    }
+  }
+}
+
+.dark {
+  background-color: black;
+  color: #999;
+
+  .checked {
+    background-color: rgba(255, 255, 255, .1);
+    color: #999;
+  }
+
+  .font-family-link {
+    border: 1px solid #999;
+  }
+
+  .title {
+    border-bottom: 1px solid #999;
+  }
+
+  input {
+    background: #999;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    background: black;
+    border: 6px solid #999;
+  }
+
+  .btns {
+    font-weight: bold;
+    .deactive {
+      font-weight: normal;
+      background-color: #999;
+      color: black;
+    }
+  }
+}
+
+.jungle {
+  background-color: darkslategrey;
+  color: cadetblue;
+
+  .checked {
+    color: cadetblue;
+    background-color: $shadow;
+  }
+
+  .font-family-link {
+    border: 1px solid cadetblue;
+  }
+
+  .title {
+    border-bottom: 1px solid cadetblue;
+  }
+
+  input {
+    background: cadetblue;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    background: darkslategrey;
+    border: 6px solid cadetblue;
+  }
+
+  .search input {
+    background: darkslategrey;
+    caret-color:cadetblue;
+  }
+
+  .btns {
+    font-weight: bold;
+    .deactive {
+    font-weight: normal;
+      background-color: cadetblue;
+      color: darkslategrey;
+    }
+  }
+}
+
+.pink {
+  background-color: #d87093;
+  color: pink;
+
+  .checked {
+    background-color: $shadow;
+    color: pink;
+  }
+
+  .font-family-link {
+    border: 1px solid #ffc0cb;
+  }
+
+  .title {
+    border-bottom: 1px solid pink;
+  }
+
+  input {
+    background: pink;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    background: #d87093;
+    border: 6px solid #ffc0cb;
+  }
+
+  .btns {
+    font-weight: bold;
+    .deactive {
+    font-weight: normal;
+      background-color: #ffc0cb;
+      color: #d87093;
+    }
+  }
+}

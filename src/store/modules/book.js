@@ -13,7 +13,7 @@ export default {
       'default',
       'dark',
       'jungle',
-      'autumn'
+      'pink'
     ],
     activatedTheme: 'default',
     settingVisibility: {

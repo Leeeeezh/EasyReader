@@ -1,14 +1,19 @@
 <template>
   <div class="wrap" :class="activatedTheme">
-    <div class="more">progress
+    <div class="more">
+      更多
     </div>
   </div>
 </template>
 
 <script>
-  import mixin from '@/mixins/storeOperateMixin.js'
+  import {
+    mapGetters
+  } from 'vuex'
   export default {
-    mixins: [mixin]
+    computed: {
+      ...mapGetters(['activatedTheme'])
+    }
   }
 
 </script>

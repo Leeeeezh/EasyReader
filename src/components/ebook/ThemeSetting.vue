@@ -12,10 +12,16 @@
 </template>
 
 <script>
-  import mixin from '@/mixins/storeOperateMixin.js'
+  import {
+    mapGetters,
+    mapActions
+  } from 'vuex'
   export default {
-    mixins: [mixin],
+    computed: {
+      ...mapGetters(['activatedTheme', 'themeList'])
+    },
     methods: {
+      ...mapActions(['setActivatedTheme']),
       setTheme(t) {
         this.setActivatedTheme(t)
         localStorage.setItem('theme', t)
@@ -62,9 +68,11 @@
           font-size: $font-size-md;
           @include flex-center-row;
           transition: all .2s ease-in-out;
+
           &:active {
             transform: translateY(px2rem(-12))
           }
+
           &.dark {
             border-color: rgba(255, 255, 255, .2)
           }

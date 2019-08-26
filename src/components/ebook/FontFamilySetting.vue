@@ -19,10 +19,16 @@
 </template>
 
 <script>
-  import mixin from '@/mixins/storeOperateMixin.js'
+  import {
+    mapGetters,
+    mapActions
+  } from 'vuex'
   export default {
-    mixins: [mixin],
+    computed: {
+      ...mapGetters(['activatedTheme', 'activatedFontFamily', 'fontFamilyList'])
+    },
     methods: {
+      ...mapActions(['setActivatedFontFamily', 'setSettingVisibility']),
       setFontFamily(f) {
         this.$emit('setfontfamily', f)
         this.setActivatedFontFamily(f)

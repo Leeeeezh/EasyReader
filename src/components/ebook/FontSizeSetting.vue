@@ -6,8 +6,8 @@
     <div class="font-size-setting">
       <span class="preview-sm">A</span>
       <div class="controller" ref="controller">
-        <div class="controller"><input type="range" @change="setFontSize($event)" @input="setFontSize($event)" :value="defaultFontSize" min="16"
-            max="28" step="2">
+        <div class="controller"><input type="range" @change="setFontSize($event)" @input="setFontSize($event)"
+            :value="defaultFontSize" min="16" max="28" step="2">
         </div>
       </div>
       <span class="preview-lg">A</span>
@@ -25,9 +25,15 @@
 </template>
 
 <script>
-  import mixin from '@/mixins/storeOperateMixin.js'
+  import {
+    mapGetters,
+    mapActions
+  } from 'vuex'
   export default {
-    mixins: [mixin],
+    // mixins: [mixin],
+    computed: {
+      ...mapGetters(['defaultFontSize', 'activatedTheme'])
+    },
     data() {
       return {
         fontSize: 22,
@@ -36,6 +42,7 @@
       }
     },
     methods: {
+      ...mapActions(['setSettingVisibility']),
       setFontSize({
         target: {
           value
@@ -69,7 +76,7 @@
     .value {
       font-size: $font-size-md;
       width: 100%;
-      padding: px2rem(10) 0;
+      padding: 0 px2rem(10);
       @include flex-center-row;
     }
 
@@ -77,7 +84,7 @@
       width: 100%;
       box-sizing: border-box;
       left: 0;
-      height: 50px;
+      height: px2rem(40);
       padding: 0 px2rem(10);
       @include flex-center-row;
       // background-color: $bg-white;
@@ -106,7 +113,6 @@
           -webkit-appearance: none;
           width: 80vw;
           height: px2rem(2);
-          background: #ccc;
           outline: none;
           border-radius: px2rem(2)
         }
@@ -125,6 +131,7 @@
     .link-wrap {
       width: 100%;
       height: px2rem(40);
+      padding: px2rem(10) 0;
       @include flex-center-row;
     }
 

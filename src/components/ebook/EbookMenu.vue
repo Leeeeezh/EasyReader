@@ -17,11 +17,16 @@
   </div>
 </template>
 <script>
-  import mixin from '@/mixins/storeOperateMixin.js'
+  import {
+    mapGetters,
+    mapActions
+  } from 'vuex'
   export default {
-    mixins: [mixin],
+    computed: {
+      ...mapGetters(['activatedTheme', 'settingVisibility'])
+    },
     methods: {
-
+      ...mapActions(['setSettingVisibility', 'toggleMenuVisibility'])
     }
   }
 

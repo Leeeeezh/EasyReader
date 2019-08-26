@@ -16,11 +16,15 @@
 </template>
 
 <script>
-  import mixin from '@/mixins/storeOperateMixin.js'
+  import {
+    mapGetters
+  } from 'vuex'
   export default {
-    mixins: [mixin],
     data() {
       return {}
+    },
+    computed: {
+      ...mapGetters(['activatedTheme', 'progress'])
     },
     methods: {
       changeValue(evt) {

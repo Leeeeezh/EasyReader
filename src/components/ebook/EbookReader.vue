@@ -28,6 +28,8 @@
     <transition name="more">
       <More class="more" v-show="settingVisibility.more" />
     </transition>
+
+    <ReaderMask v-show="settingVisibility.catalog" />
   </div>
 </template>
 
@@ -39,11 +41,19 @@
   import ProgressSetting from './ProgressSetting.vue'
   import Catalog from './Catalog.vue'
   import More from './More.vue'
-  import mixin from '@/mixins/storeOperateMixin.js'
+  import ReaderMask from './ReaderMask.vue'
+  import {
+    mapGetters,
+    mapActions
+  } from 'vuex'
   global.ePub = Epub
 
   export default {
-    mixins: [mixin],
+    computed: {
+      ...mapGetters(['fileName', 'menuVisibility', 'fontSizeSettingVisibility', 'readingBook', 'defaultFontSize',
+        'settingVisibility', 'fontFamilyList', 'activatedFontFamily', 'activatedTheme', 'themeList', 'progress'
+      ])
+    },
     data() {
       return {
         bookName: this.$route.params.fileName,
@@ -75,11 +85,11 @@
             }
           },
           {
-            name: 'autumn',
+            name: 'pink',
             style: {
               body: {
-                'color': 'burlywood',
-                'background': 'rgb(211, 121, 42)'
+                'color': '#ffc0cb',
+                'background': '#d87093'
               }
             }
           }
@@ -92,9 +102,16 @@
       ThemeSetting,
       ProgressSetting,
       Catalog,
-      More
+      More,
+      ReaderMask
     },
     methods: {
+      ...mapActions(['setFileName', 'toggleMenuVisibility', 'toggleFontSizeSettingVisibility', 'setReadingBook',
+        'setDefaultFontSize', 'setSettingVisibility', 'setActivatedFontFamily', 'setActivatedTheme', 'setProgress'
+      ]),
+      // hideAllSettings() {
+      //   this.setSettingVisibility('all')
+      // },
       onProgressChange(progress) {
         this.setProgress(progress)
         let percentage = progress / 100
@@ -117,14 +134,14 @@
           this.rendition.next()
           this.menuVisibility && this.toggleTitleAndMenu()
         }
-        this.hideAllSettings()
+        this.setSettingVisibility('all')
       },
       prevPage() {
         if (this.rendition) {
           this.rendition.prev()
           this.menuVisibility && this.toggleTitleAndMenu()
         }
-        this.hideAllSettings()
+        this.setSettingVisibility('all')
       },
       toggleTitleAndMenu() {
         this.toggleMenuVisibility()
@@ -207,7 +224,7 @@
             this.nextPage()
           } else {
             this.toggleTitleAndMenu()
-            this.hideAllSettings()
+            this.setSettingVisibility('all')
             navigator.vibrate(1000)
           }
         }, {

@@ -13,11 +13,16 @@
   </div>
 </template>
 <script>
-  import mixin from '@/mixins/storeOperateMixin.js'
+  import {
+    mapGetters,
+    mapActions
+  } from 'vuex'
   export default {
-    mixins: [mixin],
+    computed: {
+      ...mapGetters(['activatedTheme'])
+    },
     methods: {
-
+      ...mapActions(['setSettingVisibility'])
     }
   }
 
@@ -41,9 +46,9 @@
   }
 
   .dark {
-      .icon-wrapper:active {
-        background-color: rgba(255, 255, 255, .2)
-      }
+    .icon-wrapper:active {
+      background-color: rgba(255, 255, 255, .2)
     }
+  }
 
 </style>
