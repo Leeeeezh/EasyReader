@@ -51,7 +51,8 @@
   export default {
     computed: {
       ...mapGetters(['fileName', 'menuVisibility', 'fontSizeSettingVisibility', 'readingBook', 'defaultFontSize',
-        'settingVisibility', 'fontFamilyList', 'activatedFontFamily', 'activatedTheme', 'themeList', 'progress'
+        'settingVisibility', 'fontFamilyList', 'activatedFontFamily', 'activatedTheme', 'themeList', 'progress',
+        'coverURL', 'metaData'
       ])
     },
     data() {
@@ -107,11 +108,9 @@
     },
     methods: {
       ...mapActions(['setFileName', 'toggleMenuVisibility', 'toggleFontSizeSettingVisibility', 'setReadingBook',
-        'setDefaultFontSize', 'setSettingVisibility', 'setActivatedFontFamily', 'setActivatedTheme', 'setProgress'
+        'setDefaultFontSize', 'setSettingVisibility', 'setActivatedFontFamily', 'setActivatedTheme', 'setProgress',
+        'setCoverURL', 'setMetaData'
       ]),
-      // hideAllSettings() {
-      //   this.setSettingVisibility('all')
-      // },
       onProgressChange(progress) {
         this.setProgress(progress)
         let percentage = progress / 100
@@ -146,7 +145,7 @@
       toggleTitleAndMenu() {
         this.toggleMenuVisibility()
       },
-      initEpub() {
+      initBook() {
         //  加载图书资源
         const url = `${process.env.VUE_APP_RES_URL}epub/` + this.fileName + '.epub'
         this.book = new Epub(url)
@@ -155,17 +154,23 @@
           width: window.innerWidth,
           height: window.innerHeight
         })
-        //  加载字体资源
+      },
+      regFontFamily() {
+        //  注册字体资源
         this.rendition.hooks.content.register(contents => {
           contents.addStylesheet(`${process.env.VUE_APP_RES_URL}fonts/daysOne.css`)
           contents.addStylesheet(`${process.env.VUE_APP_RES_URL}fonts/cabin.css`)
           contents.addStylesheet(`${process.env.VUE_APP_RES_URL}fonts/montserrat.css`)
           contents.addStylesheet(`${process.env.VUE_APP_RES_URL}fonts/tangerine.css`)
         })
+      },
+      regTheme() {
         //  注册主题样式
         this.bookThemeList.forEach(theme => {
           this.rendition.themes.register(theme.name, theme.style)
         })
+      },
+      initFontSize() {
         //  读取字号缓存,若无则使用默认字号
         let localFontSize = localStorage.getItem('fontSize')
         if (localFontSize) {
@@ -174,7 +179,8 @@
         } else {
           this.rendition.themes.fontSize(this.defaultFontSize + 'px')
         }
-
+      },
+      initTheme() {
         //  读取主题缓存, 若无则使用默认主题
         let theme = localStorage.getItem('theme')
         if (theme) {
@@ -184,15 +190,19 @@
           this.rendition.themes.select('default')
           this.setActivatedTheme('default')
         }
+      },
+      initFontFamily() {
         //  读取字体缓存,若无则使用默认字体
         let localFontFamily = localStorage.getItem('fontFamily')
-        if (localFontSize) {
-          this.rendition.themes.font(localFontSize)
+        if (localFontFamily) {
+          this.rendition.themes.font(localFontFamily)
           this.setFontFamily(localFontFamily)
           this.setActivatedFontFamily(localFontFamily)
         } else {
           this.rendition.themes.font(this.activatedFontFamily)
         }
+      },
+      initProgress() {
         //  加载进度,locations对象默认不生成,需要手动生成
         this.book.ready.then(() => {
           return this.book.locations.generate()
@@ -207,9 +217,8 @@
             }
           }
         })
-
-        //  显示图书
-        this.rendition.display()
+      },
+      initGesture() {
         //  绑定翻页手势事件监听
         this.rendition.on('touchstart', evt => {
           this.touchStartX = evt.changedTouches[0].clientX
@@ -230,6 +239,29 @@
         }, {
           passive: false
         })
+      },
+      getBookMetaInfo() {
+        this.book.loaded.cover.then(cover => {
+          this.book.archive.createUrl(cover).then(url => {
+            this.setCoverURL(url)
+          })
+        })
+        this.book.loaded.metadata.then(metadata => {
+          this.setMetaData(metadata)
+        })
+      },
+      initEpub() {
+        this.initBook()
+        this.regFontFamily()
+        this.regTheme()
+        this.initFontSize()
+        this.initTheme()
+        this.initFontFamily()
+        this.initProgress()
+        this.initGesture()
+        this.getBookMetaInfo()
+        //  显示图书
+        this.rendition.display()
       }
     },
     mounted() {

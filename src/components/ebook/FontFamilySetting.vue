@@ -78,8 +78,6 @@
       justify-content: space-between;
 
       &.checked {
-        // color: $font-color;
-        // background-color: $shadow;
         font-weight: bold;
       }
 

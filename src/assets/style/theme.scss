@@ -2,7 +2,11 @@
   background-color: rgb(243, 243, 243);
   color: black;
 
-  .checkd {
+  .header {
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+  }
+
+  .checked {
     color: $font-color;
     background-color: $shadow;
   }
@@ -15,8 +19,17 @@
     border-bottom: 1px solid $shadow;
   }
 
+  .search {
+    border: 1px solid rgba(0, 0, 0, .4);
+  }
+
   input {
     background: $shadow;
+  }
+
+  .search input {
+    background-color: rgb(243, 243, 243);
+    color: black;
   }
 
   input[type=range]::-webkit-slider-thumb {
@@ -26,6 +39,7 @@
 
   .btns {
     font-weight: bold;
+
     .deactive {
       background-color: #999;
       color: black;
@@ -37,6 +51,10 @@
 .dark {
   background-color: black;
   color: #999;
+
+  .header {
+    border-bottom: 1px solid rgba(255, 255, 255, .2);
+  }
 
   .checked {
     background-color: rgba(255, 255, 255, .1);
@@ -51,8 +69,17 @@
     border-bottom: 1px solid #999;
   }
 
+  .search {
+    border: 1px solid rgba(255, 255, 255, .4);
+  }
+
   input {
     background: #999;
+  }
+
+  .search input {
+    background-color: black;
+    color: #999;
   }
 
   input[type=range]::-webkit-slider-thumb {
@@ -62,6 +89,7 @@
 
   .btns {
     font-weight: bold;
+
     .deactive {
       font-weight: normal;
       background-color: #999;
@@ -73,6 +101,10 @@
 .jungle {
   background-color: darkslategrey;
   color: cadetblue;
+
+  .header {
+    border-bottom: 1px solid rgba(255, 255, 255, .2);
+  }
 
   .checked {
     color: cadetblue;
@@ -87,6 +119,10 @@
     border-bottom: 1px solid cadetblue;
   }
 
+  .search {
+    border: 1px solid rgba(255, 255, 255, .4);
+  }
+
   input {
     background: cadetblue;
   }
@@ -97,14 +133,15 @@
   }
 
   .search input {
-    background: darkslategrey;
-    caret-color:cadetblue;
+    background-color: darkslategrey;
+    color: cadetblue;
   }
 
   .btns {
     font-weight: bold;
+
     .deactive {
-    font-weight: normal;
+      font-weight: normal;
       background-color: cadetblue;
       color: darkslategrey;
     }
@@ -114,6 +151,10 @@
 .pink {
   background-color: #d87093;
   color: pink;
+
+  .header {
+    border-bottom: 1px solid rgba(255, 255, 255, .2);
+  }
 
   .checked {
     background-color: $shadow;
@@ -128,8 +169,17 @@
     border-bottom: 1px solid pink;
   }
 
+  .search {
+    border: 1px solid rgba(255, 255, 255, .4);
+  }
+
   input {
     background: pink;
+  }
+
+  .search input {
+    background-color: palevioletred;
+    color: pink;
   }
 
   input[type=range]::-webkit-slider-thumb {
@@ -139,8 +189,9 @@
 
   .btns {
     font-weight: bold;
+
     .deactive {
-    font-weight: normal;
+      font-weight: normal;
       background-color: #ffc0cb;
       color: #d87093;
     }

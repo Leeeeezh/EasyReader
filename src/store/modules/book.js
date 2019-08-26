@@ -7,6 +7,11 @@ export default {
     fontFamilyList: ['daysOne', 'cabin', 'montserrat', 'tangerine'],
     activatedFontFamily: 'daysOne',
     readingBook: null,
+    coverURL: null,
+    metaData: {
+      creator: '加载中',
+      title: '加载中'
+    },
     progress: 10,
     defaultFontSize: 22,
     themeList: [
@@ -26,6 +31,18 @@ export default {
     }
   },
   mutations: {
+    'SET_META_DATA': (state, {
+      creator,
+      title
+    }) => {
+      state.metaData = {
+        creator,
+        title
+      }
+    },
+    'SET_COVER_URL': (state, coverURL) => {
+      state.coverURL = coverURL
+    },
     'SET_PROGRESS': (state, progress) => {
       state.progress = progress
     },

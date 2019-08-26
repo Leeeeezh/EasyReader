@@ -1,4 +1,20 @@
 export default {
+  setMetaData({
+    commit
+  }, {
+    creator,
+    title
+  }) {
+    return commit('SET_META_DATA', {
+      creator,
+      title
+    })
+  },
+  setCoverURL({
+    commit
+  }, coverURL) {
+    return commit('SET_COVER_URL', coverURL)
+  },
   setProgress({
     commit
   }, progress) {

@@ -9,5 +9,7 @@ export default {
   activatedFontFamily: state => state.book.activatedFontFamily,
   activatedTheme: state => state.book.activatedTheme,
   themeList: state => state.book.themeList,
-  progress: state => state.book.progress
+  progress: state => state.book.progress,
+  coverURL: state => state.book.coverURL,
+  metaData: state => state.book.metaData
 }
