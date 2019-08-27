@@ -8,27 +8,35 @@ export default {
       title
     }
   },
+
   'SET_COVER_URL': (state, coverURL) => {
     state.coverURL = coverURL
   },
+
   'SET_PROGRESS': (state, progress) => {
     state.progress = progress
   },
+
   'SET_FILENAME': (state, fileName) => {
     state.fileName = fileName
   },
+
   'TOGGLE_MENU_VISIBILITY': (state) => {
     state.menuVisibility = !state.menuVisibility
   },
+
   'TOGGLE_FONTSIZE_SETTING_VISIBILITY': (state) => {
     state.fontSizeSettingVisibility = !state.fontSizeSettingVisibility
   },
+
   'SET_READING_BOOK': (state, readingBook) => {
     state.readingBook = readingBook
   },
+
   'SET_DEFAULT_FONT_SIZE': (state, fontSize) => {
     state.defaultFontSize = fontSize
   },
+
   'SET_SETTING_VISIBILITY': (state, setting) => {
     for (let s of Object.keys(state.settingVisibility)) {
       if (s === setting) {
@@ -42,9 +50,11 @@ export default {
       }
     }
   },
+
   'SET_ACTIVATED_FONT_FAMILY': (state, fontFamilyName) => {
     state.activatedFontFamily = fontFamilyName
   },
+
   'SET_ACTIVATED_THEME': (state, theme) => {
     state.activatedTheme = theme
   }

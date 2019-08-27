@@ -10,16 +10,19 @@ export default {
       title
     })
   },
+
   setCoverURL({
     commit
   }, coverURL) {
     return commit('SET_COVER_URL', coverURL)
   },
+
   setProgress({
     commit
   }, progress) {
     return commit('SET_PROGRESS', progress)
   },
+
   setFileName({
     commit
   }, fileName) {

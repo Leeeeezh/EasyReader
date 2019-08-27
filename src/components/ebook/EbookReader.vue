@@ -28,8 +28,9 @@
     <transition name="more">
       <More class="more" v-show="settingVisibility.more" />
     </transition>
-
-    <ReaderMask v-show="settingVisibility.catalog" />
+    <transition name="mask">
+      <ReaderMask v-show="settingVisibility.catalog" />
+    </transition>
   </div>
 </template>
 
@@ -111,6 +112,11 @@
         'setDefaultFontSize', 'setSettingVisibility', 'setActivatedFontFamily', 'setActivatedTheme', 'setProgress',
         'setCoverURL', 'setMetaData'
       ]),
+      refreshLocation() {
+        let currentLocation = this.book.rendition.currentLocation()
+        let progress = (this.book.locations.percentageFromCfi(currentLocation.start.cfi) * 100).toFixed(2)
+        this.setProgress(progress)
+      },
       onProgressChange(progress) {
         this.setProgress(progress)
         let percentage = progress / 100
@@ -234,7 +240,7 @@
           } else {
             this.toggleTitleAndMenu()
             this.setSettingVisibility('all')
-            navigator.vibrate(1000)
+            this.refreshLocation()
           }
         }, {
           passive: false
@@ -293,5 +299,20 @@
   @include panelStyle(progress-setting, Y, 100%);
   @include panelStyle(catalog, X, -100%);
   @include panelStyle(more, y, -100%);
+
+  .mask-enter,
+  .mask-leave-to {
+    opacity: 0;
+  }
+
+  .mask-enter-active,
+  .mask-leave-active {
+    transition: all .2s ease-in-out;
+  }
+
+  .mask-leave,
+  .mask-enter-to {
+    opacity: 1;
+  }
 
 </style>
