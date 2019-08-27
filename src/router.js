@@ -6,7 +6,7 @@ Vue.use(Router)
 export default new Router({
   routes: [{
     path: '/',
-    redirect: '/ebook'
+    redirect: '/ebook/Laws|2015_Book_ProtectingTheRightsOfPeopleWit'
   }, {
     path: '/ebook',
     component: () => import('./views/ebook/EbookRoot.vue'),
