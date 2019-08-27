@@ -64,9 +64,22 @@ export default {
   }, fontFamily) {
     return commit('SET_ACTIVATED_FONT_FAMILY', fontFamily)
   },
+
   setActivatedTheme({
     commit
   }, theme) {
     return commit('SET_ACTIVATED_THEME', theme)
+  },
+
+  setCatalog({
+    commit
+  }, catalog) {
+    return commit('SET_CATALOG', catalog)
+  },
+
+  setChapter({
+    commit
+  }, chapter) {
+    return commit('SET_CHAPTER', chapter)
   }
 }

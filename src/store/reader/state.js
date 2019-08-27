@@ -20,6 +20,8 @@ export default {
     title: '加载中'
   },
 
+  catalog: [],
+  chapter: '',
   progress: 10,
   defaultFontSize: 22,
 

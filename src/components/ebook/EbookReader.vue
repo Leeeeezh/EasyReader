@@ -53,7 +53,7 @@
     computed: {
       ...mapGetters(['fileName', 'menuVisibility', 'fontSizeSettingVisibility', 'readingBook', 'defaultFontSize',
         'settingVisibility', 'fontFamilyList', 'activatedFontFamily', 'activatedTheme', 'themeList', 'progress',
-        'coverURL', 'metaData'
+        'coverURL', 'metaData', 'catalog'
       ])
     },
     data() {
@@ -110,7 +110,7 @@
     methods: {
       ...mapActions(['setFileName', 'toggleMenuVisibility', 'toggleFontSizeSettingVisibility', 'setReadingBook',
         'setDefaultFontSize', 'setSettingVisibility', 'setActivatedFontFamily', 'setActivatedTheme', 'setProgress',
-        'setCoverURL', 'setMetaData'
+        'setCoverURL', 'setMetaData', 'setCatalog', 'setChapter'
       ]),
       refreshLocation() {
         let currentLocation = this.book.rendition.currentLocation()
@@ -246,6 +246,7 @@
           passive: false
         })
       },
+
       getBookMetaInfo() {
         this.book.loaded.cover.then(cover => {
           this.book.archive.createUrl(cover).then(url => {
@@ -254,6 +255,29 @@
         })
         this.book.loaded.metadata.then(metadata => {
           this.setMetaData(metadata)
+        })
+
+        this.book.loaded.navigation.then(nav => {
+          let flattenTOC = (function flattenTOC(toc) {
+            return [].concat(...toc.map(item => [].concat(item, ...flattenTOC(item.subitems))))
+          })(nav.toc)
+          let catalog = []
+          for (let item of flattenTOC) {
+            let level = (function getLevel(item, level = 1) {
+              if (!item.parent) {
+                return level
+              } else {
+                return getLevel(flattenTOC.filter(parrentItem => parrentItem.id === item.parent)[0], ++level)
+              }
+            })(item)
+            catalog.push({
+              label: item.label.replace(/\s/, '').trim(),
+              level: level
+            })
+          }
+          this.setCatalog(catalog)
+          this.setChapter(catalog[0].label)
+          console.table(this.catalog)
         })
       },
       initEpub() {

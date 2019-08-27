@@ -4,8 +4,15 @@
       <component :is="views[activeView]"></component>
     </div>
     <div class="btns">
-      <div class="btn" :class="[activeView==='CatalogView'?'':'deactive']" ref="catalog" @click="active('CatalogView')"><span>目录</span></div>
-      <div class="btn" :class="[activeView==='BookMarkView'?'':'deactive']" ref="bookmark" @click="active('BookMarkView')"><span>书签</span></div>
+      <div class="btn" @click="active('CatalogView')">
+        <span>目录</span>
+        <span class="bar" v-show="activeView==='CatalogView'"></span>
+      </div>
+      <div class="btn" ref="bookmark"
+        @click="active('BookMarkView')">
+        <span>书签</span>
+        <span class="bar" v-show="activeView==='BookMarkView'"></span>
+      </div>
     </div>
   </div>
 </template>
@@ -44,20 +51,28 @@
 
 <style lang="scss" scoped>
   .wrap {
-    width: 60vw;
+    width: 80vw;
     height: 100vh;
 
-    .btns{
-      width:100%;
+    .view {
+      height: 94vh;
+    }
+
+    .btns {
+      width: 100%;
+      height: 6vh;
       position: absolute;
       bottom: 0;
+      box-shadow: 0 0 10px rgba(0, 0, 0, .3);
       @include flex-center-row;
+
       .btn {
+        height: 100%;
         transition: all .2s ease-in-out;
         flex: 1;
         font-size: $font-size-md;
-        @include flex-center-row;
-        padding: px2rem(10) 0;
+        box-sizing: border-box;
+        @include flex-center-col;
       }
     }
   }

@@ -1,4 +1,7 @@
 export default {
+  'SET_CHAPTER': (state, chapter) => {
+    state.chapter = chapter
+  },
   'SET_META_DATA': (state, {
     creator,
     title
@@ -7,6 +10,10 @@ export default {
       creator,
       title
     }
+  },
+
+  'SET_CATALOG': (state, catalog) => {
+    state.catalog = catalog
   },
 
   'SET_COVER_URL': (state, coverURL) => {

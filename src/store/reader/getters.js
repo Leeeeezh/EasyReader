@@ -11,5 +11,7 @@ export default {
   themeList: state => state.themeList,
   progress: state => state.progress,
   coverURL: state => state.coverURL,
-  metaData: state => state.metaData
+  metaData: state => state.metaData,
+  catalog: state => state.catalog,
+  chapter: state => state.chapter
 }

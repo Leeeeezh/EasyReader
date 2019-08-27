@@ -9,6 +9,7 @@
   .checked {
     color: $font-color;
     background-color: $shadow;
+    border-left: px2rem(4) solid #000;
   }
 
   .font-family-link {
@@ -32,18 +33,36 @@
     color: black;
   }
 
+  .search input::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, .6);
+  }
+
   input[type=range]::-webkit-slider-thumb {
     background: black;
     border: 6px solid $bg-white;
   }
 
+  .search input::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, .6);
+  }
+
   .btns {
     font-weight: bold;
+    background-color: rgb(243, 243, 243);
 
-    .deactive {
-      background-color: #999;
-      color: black;
-      font-weight: normal;
+    // .deactive {
+    //   background-color: #999;
+    //   color: black;
+    //   font-weight: normal;
+    //   color: #fff;
+    // }
+
+
+    .bar {
+      margin-top: px2rem(6);
+      width: 20%;
+      height: 2px;
+      background-color: rgba(0, 0, 0, .4)
     }
   }
 }
@@ -59,6 +78,11 @@
   .checked {
     background-color: rgba(255, 255, 255, .1);
     color: #999;
+    border-left: px2rem(4) solid #999;
+
+    & span {
+      font-weight: bold;
+    }
   }
 
   .font-family-link {
@@ -82,6 +106,10 @@
     color: #999;
   }
 
+  .search input::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, .6);
+  }
+
   input[type=range]::-webkit-slider-thumb {
     background: black;
     border: 6px solid #999;
@@ -89,11 +117,19 @@
 
   .btns {
     font-weight: bold;
+    background-color: black;
 
-    .deactive {
-      font-weight: normal;
-      background-color: #999;
-      color: black;
+    // .deactive {
+    //   font-weight: normal;
+    //   background-color: #999;
+    //   color: #fff;
+    // }
+
+    .bar {
+      margin-top: px2rem(6);
+      width: 20%;
+      height: 2px;
+      background-color: rgba(255, 255, 255, .4)
     }
   }
 }
@@ -109,6 +145,11 @@
   .checked {
     color: cadetblue;
     background-color: $shadow;
+    border-left: px2rem(4) solid cadetblue;
+
+    & span {
+      font-weight: bold;
+    }
   }
 
   .font-family-link {
@@ -127,6 +168,10 @@
     background: cadetblue;
   }
 
+  .search input::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, .6);
+  }
+
   input[type=range]::-webkit-slider-thumb {
     background: darkslategrey;
     border: 6px solid cadetblue;
@@ -139,17 +184,25 @@
 
   .btns {
     font-weight: bold;
+    background-color: darkslategray;
 
-    .deactive {
-      font-weight: normal;
-      background-color: cadetblue;
-      color: darkslategrey;
+    // .deactive {
+    //   font-weight: normal;
+    //   background-color: cadetblue;
+    //   color: darkslategrey;
+    // }
+
+    .bar {
+      margin-top: px2rem(6);
+      width: 20%;
+      height: 2px;
+      background-color: rgba(255, 255, 255, .4)
     }
   }
 }
 
 .pink {
-  background-color: #d87093;
+  background-color: palevioletred;
   color: pink;
 
   .header {
@@ -159,6 +212,11 @@
   .checked {
     background-color: $shadow;
     color: pink;
+    border-left: px2rem(4) solid pink;
+
+    & span {
+      font-weight: bold;
+    }
   }
 
   .font-family-link {
@@ -177,9 +235,17 @@
     background: pink;
   }
 
+  .search input::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, .6);
+  }
+
   .search input {
     background-color: palevioletred;
     color: pink;
+  }
+
+  .search input::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, .6);
   }
 
   input[type=range]::-webkit-slider-thumb {
@@ -189,11 +255,19 @@
 
   .btns {
     font-weight: bold;
+    background-color: palevioletred;
 
-    .deactive {
-      font-weight: normal;
-      background-color: #ffc0cb;
-      color: #d87093;
+    // .deactive {
+    //   font-weight: normal;
+    //   background-color: pink;
+    //   color: palevioletred;
+    // }
+
+    .bar {
+      margin-top: px2rem(6);
+      width: 20%;
+      height: 2px;
+      background-color: rgba(255, 255, 255, .4)
     }
   }
 }
