@@ -1,19 +1,21 @@
 <template>
   <div id="app">
     <transition name="router-view-animation" mode="out-in">
-      <router-view></router-view>
+      <keep-alive>
+        <router-view @back="console.log('ff')"></router-view>
+      </keep-alive>
     </transition>
 
     <transition name="btns-animation">
       <div class="btns" v-show="$route.path==='/store'||$route.path==='/shelf'">
 
-        <div class="icon-wrapper" @click="view='store'" :class="[view==='store'?'active':'']">
+        <div class="icon-wrapper" @click="setView('store')" :class="[view==='store'?'active':'']">
           <router-link to="/store" tag=div>
             <span class="icon-book2"></span>
           </router-link>
         </div>
 
-        <div class="icon-wrapper" @click="view='shelf'" :class="[view==='shelf'?'active':'']">
+        <div class="icon-wrapper" @click="setView('shelf')" :class="[view==='shelf'?'active':'']">
           <router-link to="/shelf" tag="div">
             <span class="icon-shelf"></span>
           </router-link>
@@ -32,11 +34,16 @@
 </template>
 
 <script>
+  import {
+    mapGetters,
+    mapActions
+  } from 'vuex'
   export default {
-    data() {
-      return {
-        view: 'store'
-      }
+    computed: {
+      ...mapGetters(['view'])
+    },
+    methods: {
+      ...mapActions(['setView'])
     }
   }
   document.addEventListener('DOMContentLoaded', () => {
@@ -70,6 +77,7 @@
         &.active {
           border-bottom: px2rem(4) solid #000;
           background-color: #eee;
+
           span {
             font-size: px2rem(26);
           }
@@ -77,6 +85,7 @@
 
         &:active {
           background-color: #eee;
+
           span {
             font-size: px2rem(26);
           }

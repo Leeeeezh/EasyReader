@@ -17,16 +17,24 @@
   import EbookTitle from '@/components/ebook/EbookTitle.vue'
   import EbookMenu from '@/components/ebook/EbookMenu.vue'
   import {
-    mapGetters
+    mapGetters,
+    mapActions
   } from 'vuex'
   export default {
     computed: {
-      ...mapGetters(['menuVisibility'])
+      ...mapGetters(['menuVisibility', 'view'])
     },
     components: {
       EbookReader,
       EbookTitle,
       EbookMenu
+    },
+    methods: {
+      ...mapActions(['setView'])
+    },
+    beforeRouteLeave(to, from, next) {
+      // this.setView('store')
+      next()
     }
   }
 

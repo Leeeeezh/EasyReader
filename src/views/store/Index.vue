@@ -1,11 +1,19 @@
 <template>
-    <div class="store">
-      store
-    </div>
+  <div class="store">
+    store
+  </div>
 </template>
 
 <script>
-  export default {}
+  import {
+    // mapGetters,
+    mapActions
+  } from 'vuex'
+  export default {
+    methods: {
+      ...mapActions(['setView'])
+    }
+  }
 
 </script>
 

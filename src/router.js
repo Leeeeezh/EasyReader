@@ -6,8 +6,8 @@ Vue.use(Router)
 export default new Router({
   routes: [{
       path: '/',
-      redirect: '/ebook/LifeSciences|2016_Book_TechnologicalAndInstitutionalI'
-      // redirect: '/store'
+      // redirect: '/ebook/LifeSciences|2016_Book_TechnologicalAndInstitutionalI'
+      redirect: '/store'
     },
     {
       path: '/ebook',

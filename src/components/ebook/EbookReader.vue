@@ -54,7 +54,7 @@
     computed: {
       ...mapGetters(['fileName', 'menuVisibility', 'fontSizeSettingVisibility', 'readingBook', 'defaultFontSize',
         'settingVisibility', 'fontFamilyList', 'activatedFontFamily', 'activatedTheme', 'themeList', 'progress',
-        'coverURL', 'metaData', 'catalog', 'section'
+        'coverURL', 'metaData', 'catalog', 'section', 'flag'
       ])
     },
     data() {
@@ -111,26 +111,28 @@
     methods: {
       ...mapActions(['setFileName', 'toggleMenuVisibility', 'toggleFontSizeSettingVisibility', 'setReadingBook',
         'setDefaultFontSize', 'setSettingVisibility', 'setActivatedFontFamily', 'setActivatedTheme', 'setProgress',
-        'setCoverURL', 'setMetaData', 'setCatalog', 'setChapter', 'setSection'
+        'setCoverURL', 'setMetaData', 'setCatalog', 'setChapter', 'setSection', 'setFlag'
       ]),
       refreshLocation() {
-        // 检测当前阅读进度并写入本地缓存
+        // 检测当前阅读进度并写入本地缓存,翻页,选择章节,调整进度时调用
         let currentLocation = this.book.rendition.currentLocation()
         let progress = (this.book.locations.percentageFromCfi(currentLocation.start.cfi) * 100).toFixed(0)
         this.setProgress(progress)
         storage.saveProgress(progress, this.bookName)
       },
       refreshSection() {
-        // 更新进度章节
+        // 更新Vuex章节链接,调节进度完成时执行
         this.setSection(this.book.section(this.book.rendition.currentLocation().start.index).href)
       },
       onProgressChange(progress) {
+        //  调节进度时执行此方法
         this.setProgress(progress)
         let percentage = progress / 100
         //  epubjs通过locations对象的cfiFromPercentage定位阅读进度,将产生的location定位对象传入rendition对象的display方法显示对应进度的内容
         let location = percentage > 0 ? this.locations.cfiFromPercentage(percentage) : 0
         //  display为异步方法!!!
         this.rendition.display(location).then(() => {
+          this.setFlag(false)
           this.refreshSection()
         })
       },
@@ -318,9 +320,10 @@
     },
     watch: {
       section(section) {
-        this.navToSection(section)
+        //  调整进度引起的Vuex章节数据改变不应该执行以下方法!!!!
+        this.flag && this.navToSection(section)
         setTimeout(() => {
-          this.setSettingVisibility('all')
+          !this.settingVisibility.progress && this.setSettingVisibility('all')
         }, 200)
       }
     },

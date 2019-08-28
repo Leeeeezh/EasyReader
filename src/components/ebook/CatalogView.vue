@@ -43,7 +43,7 @@
       ...mapGetters(['coverURL', 'progress', 'metaData', 'catalog', 'chapter', 'section'])
     },
     methods: {
-      ...mapActions(['setChapter', 'setSection']),
+      ...mapActions(['setChapter', 'setSection', 'setFlag']),
       setChapterAndSection({
         target: {
           dataset: {
@@ -53,6 +53,7 @@
         }
       }) {
         this.setChapter(chapter)
+        this.setFlag(true)
         this.setSection(section)
       }
     },

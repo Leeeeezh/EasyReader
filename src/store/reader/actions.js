@@ -91,5 +91,10 @@ export default {
     commit
   }, section) {
     return commit('SET_SECTION', section)
+  },
+  setFlag({
+    commit
+  }, flag) {
+    return commit('SET_FLAG', flag)
   }
 }

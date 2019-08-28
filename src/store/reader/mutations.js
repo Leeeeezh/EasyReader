@@ -1,4 +1,7 @@
 export default {
+  'SET_FLAG': (state, flag) => {
+    state.flag = flag
+  },
   'SET_BOOK_AVAILABLE': state => {
     state.bokkAvailable = true
   },

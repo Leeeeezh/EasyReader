@@ -4,7 +4,7 @@
 
       <div class="back" @click.self="$emit('back')">
         <div class="icon-wrapper">
-          <router-link to="/store" tag="div">
+          <router-link :to="`/${view}`" tag="div">
             <span class="icon-back"></span>
           </router-link>
         </div>
@@ -25,7 +25,7 @@
   } from 'vuex'
   export default {
     computed: {
-      ...mapGetters(['activatedTheme'])
+      ...mapGetters(['activatedTheme', 'view'])
     },
     methods: {
       ...mapActions(['setSettingVisibility'])

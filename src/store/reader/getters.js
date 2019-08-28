@@ -1,4 +1,5 @@
 export default {
+  flag: state => state.flag,
   fileName: state => state.fileName,
   menuVisibility: state => state.menuVisibility,
   fontSizeSettingVisibility: state => state.fontSizeSettingVisibility,
