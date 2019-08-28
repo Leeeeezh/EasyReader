@@ -117,12 +117,16 @@
         let progress = (this.book.locations.percentageFromCfi(currentLocation.start.cfi) * 100).toFixed(2)
         this.setProgress(progress)
       },
+      refreshSection() {
+        this.setSection(this.book.section(this.book.rendition.currentLocation().start.index).href)
+      },
       onProgressChange(progress) {
         this.setProgress(progress)
         let percentage = progress / 100
         //  epubjs通过locations对象的cfiFromPercentage定位阅读进度,将产生的location定位对象传入rendition对象的display方法显示对应进度的内容
         let location = percentage > 0 ? this.locations.cfiFromPercentage(percentage) : 0
         this.rendition.display(location)
+        this.refreshSection()
       },
       setTheme(t) {
         this.rendition.themes.select(t)
@@ -140,12 +144,14 @@
           this.menuVisibility && this.toggleTitleAndMenu()
         }
         this.setSettingVisibility('all')
+        this.setSection(this.book.section(this.book.rendition.currentLocation().start.index).href)
       },
       prevPage() {
         if (this.rendition) {
           this.rendition.prev()
           this.menuVisibility && this.toggleTitleAndMenu()
         }
+        this.setSection(this.book.section(this.book.rendition.currentLocation().start.index).href)
         this.setSettingVisibility('all')
       },
       toggleTitleAndMenu() {

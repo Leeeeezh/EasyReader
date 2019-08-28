@@ -22,7 +22,7 @@
         <div class="detail">
           <ul>
             <li v-for="(c,i) in catalog" :key="i" :style="`paddingLeft:${c.level * 20}px;`"
-              :class="chapter===c.label?'checked':''" :data-section="c.section" :data-chapter="c.label"
+              :class="section===c.section?'checked':''" :data-section="c.section" :data-chapter="c.label"
               @click="setChapterAndSection($event)">
               {{c.label}}
               </li>
