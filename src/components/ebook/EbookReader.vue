@@ -43,6 +43,7 @@
   import Catalog from './Catalog.vue'
   import More from './More.vue'
   import ReaderMask from './ReaderMask.vue'
+  import storage from '@/utils/localStorage.js'
   import {
     mapGetters,
     mapActions
@@ -113,11 +114,14 @@
         'setCoverURL', 'setMetaData', 'setCatalog', 'setChapter', 'setSection'
       ]),
       refreshLocation() {
+        // 检测当前阅读进度并写入本地缓存
         let currentLocation = this.book.rendition.currentLocation()
         let progress = (this.book.locations.percentageFromCfi(currentLocation.start.cfi) * 100).toFixed(0)
         this.setProgress(progress)
+        storage.saveProgress(progress, this.bookName)
       },
       refreshSection() {
+        // 更新进度章节
         this.setSection(this.book.section(this.book.rendition.currentLocation().start.index).href)
       },
       onProgressChange(progress) {
@@ -141,20 +145,24 @@
         this.rendition.themes.font(`${f}`)
       },
       nextPage() {
+        //  翻到下一页并缓存进度
         if (this.rendition) {
           this.rendition.next()
           this.menuVisibility && this.toggleTitleAndMenu()
         }
         this.setSettingVisibility('all')
         this.setSection(this.book.section(this.book.rendition.currentLocation().start.index).href)
+        this.refreshLocation()
       },
       prevPage() {
+        //  翻到上一页并缓存进度
         if (this.rendition) {
           this.rendition.prev()
           this.menuVisibility && this.toggleTitleAndMenu()
         }
         this.setSection(this.book.section(this.book.rendition.currentLocation().start.index).href)
         this.setSettingVisibility('all')
+        this.refreshLocation()
       },
       toggleTitleAndMenu() {
         this.toggleMenuVisibility()
@@ -255,7 +263,10 @@
         })
       },
       navToSection(section) {
-        this.book.rendition.display(section)
+        // 根据章节链接导航至对应章节页, 导航成功后更新进度缓存
+        this.book.rendition.display(section).then(() => {
+          this.refreshLocation()
+        })
       },
       getBookMetaInfo() {
         this.book.loaded.cover.then(cover => {
@@ -308,9 +319,9 @@
     watch: {
       section(section) {
         this.navToSection(section)
-        // setTimeout(() => {
-        //   this.setSettingVisibility('all')
-        // }, 1000)
+        setTimeout(() => {
+          this.setSettingVisibility('all')
+        }, 200)
       }
     },
     mounted() {

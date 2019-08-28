@@ -1,9 +1,15 @@
 <template>
   <div class="wrap" :class="activatedTheme">
     <div class="ebook-title">
-      <div class="back">
-        <div class="icon-wrapper"><span class="icon-back"></span></div>
+
+      <div class="back" @click.self="$emit('back')">
+        <div class="icon-wrapper">
+          <router-link to="/store" tag="div">
+            <span class="icon-back"></span>
+          </router-link>
+        </div>
       </div>
+
       <div class="ebook-title-icons">
         <div class="icon-wrapper"><span class="icon-shelf"></span></div>
         <div class="icon-wrapper"><span class="icon-cart"></span></div>
