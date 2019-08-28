@@ -13,5 +13,7 @@ export default {
   coverURL: state => state.coverURL,
   metaData: state => state.metaData,
   catalog: state => state.catalog,
-  chapter: state => state.chapter
+  chapter: state => state.chapter,
+  bookAvailbale: state => state.bookAvailable,
+  section: state => state.section
 }

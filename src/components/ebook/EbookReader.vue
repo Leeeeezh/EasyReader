@@ -53,7 +53,7 @@
     computed: {
       ...mapGetters(['fileName', 'menuVisibility', 'fontSizeSettingVisibility', 'readingBook', 'defaultFontSize',
         'settingVisibility', 'fontFamilyList', 'activatedFontFamily', 'activatedTheme', 'themeList', 'progress',
-        'coverURL', 'metaData', 'catalog'
+        'coverURL', 'metaData', 'catalog', 'section'
       ])
     },
     data() {
@@ -110,7 +110,7 @@
     methods: {
       ...mapActions(['setFileName', 'toggleMenuVisibility', 'toggleFontSizeSettingVisibility', 'setReadingBook',
         'setDefaultFontSize', 'setSettingVisibility', 'setActivatedFontFamily', 'setActivatedTheme', 'setProgress',
-        'setCoverURL', 'setMetaData', 'setCatalog', 'setChapter'
+        'setCoverURL', 'setMetaData', 'setCatalog', 'setChapter', 'setSection'
       ]),
       refreshLocation() {
         let currentLocation = this.book.rendition.currentLocation()
@@ -211,6 +211,7 @@
       initProgress() {
         //  加载进度,locations对象默认不生成,需要手动生成
         this.book.ready.then(() => {
+          console.log(this.book.section())
           return this.book.locations.generate()
         }).then(result => {
           this.locations = this.book.locations
@@ -246,7 +247,9 @@
           passive: false
         })
       },
-
+      navToSection(section) {
+        this.book.rendition.display(section)
+      },
       getBookMetaInfo() {
         this.book.loaded.cover.then(cover => {
           this.book.archive.createUrl(cover).then(url => {
@@ -258,6 +261,7 @@
         })
 
         this.book.loaded.navigation.then(nav => {
+          console.log(nav)
           let flattenTOC = (function flattenTOC(toc) {
             return [].concat(...toc.map(item => [].concat(item, ...flattenTOC(item.subitems))))
           })(nav.toc)
@@ -267,17 +271,17 @@
               if (!item.parent) {
                 return level
               } else {
-                return getLevel(flattenTOC.filter(parrentItem => parrentItem.id === item.parent)[0], ++level)
+                return getLevel(flattenTOC.filter(parentItem => parentItem.id === item.parent)[0], ++level)
               }
             })(item)
             catalog.push({
               label: item.label.replace(/\s/, '').trim(),
-              level: level
+              level: level,
+              section: item.href
             })
           }
           this.setCatalog(catalog)
           this.setChapter(catalog[0].label)
-          console.table(this.catalog)
         })
       },
       initEpub() {
@@ -292,6 +296,14 @@
         this.getBookMetaInfo()
         //  显示图书
         this.rendition.display()
+      }
+    },
+    watch: {
+      section(section) {
+        this.navToSection(section)
+        // setTimeout(() => {
+        //   this.setSettingVisibility('all')
+        // }, 1000)
       }
     },
     mounted() {

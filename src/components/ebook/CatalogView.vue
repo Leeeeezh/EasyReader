@@ -22,7 +22,10 @@
         <div class="detail">
           <ul>
             <li v-for="(c,i) in catalog" :key="i" :style="`paddingLeft:${c.level * 20}px;`"
-              :class="chapter===c.label?'checked':''" @click="setChapter(c.label)"><span>{{c.label}}</span></li>
+              :class="chapter===c.label?'checked':''" :data-section="c.section" :data-chapter="c.label"
+              @click="setChapterAndSection($event)">
+              {{c.label}}
+              </li>
             <li> </li>
           </ul>
         </div>
@@ -37,14 +40,23 @@
   } from 'vuex'
   export default {
     computed: {
-      ...mapGetters(['coverURL', 'progress', 'metaData', 'catalog', 'chapter'])
+      ...mapGetters(['coverURL', 'progress', 'metaData', 'catalog', 'chapter', 'section'])
     },
     methods: {
-      ...mapActions(['setChapter'])
+      ...mapActions(['setChapter', 'setSection']),
+      setChapterAndSection({
+        target: {
+          dataset: {
+            chapter,
+            section
+          }
+        }
+      }) {
+        this.setChapter(chapter)
+        this.setSection(section)
+      }
     },
-    mounted() {
-
-    }
+    mounted() {}
   }
 
 </script>
@@ -123,10 +135,16 @@
 
               &.title {
                 font-weight: bold;
-                line-clamp: 2;
                 border: none;
                 padding-bottom: px2rem(10);
+                display: -webkit-box;
+                word-break: break-all;
+                -webkit-box-orient: vertical;
                 -webkit-line-clamp: 3;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                line-height: px2rem(16);
+                height: px2rem(48);
               }
 
               &.creator {
@@ -157,6 +175,7 @@
             border-bottom: 1px solid rgba(0, 0, 0, .1);
             padding: px2rem(10);
             transition: all .3s ease-in-out;
+
             span {
               line-height: px2rem(20);
             }

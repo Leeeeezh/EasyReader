@@ -81,5 +81,15 @@ export default {
     commit
   }, chapter) {
     return commit('SET_CHAPTER', chapter)
+  },
+  setBookAvailable({
+    commit
+  }, chapter) {
+    return commit('SET_BOOKAVAILABLE')
+  },
+  setSection({
+    commit
+  }, section) {
+    return commit('SET_SECTION', section)
   }
 }

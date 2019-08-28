@@ -1,4 +1,10 @@
 export default {
+  'SET_BOOK_AVAILABLE': state => {
+    state.bokkAvailable = true
+  },
+  'SET_SECTION': (state, section) => {
+    state.section = section
+  },
   'SET_CHAPTER': (state, chapter) => {
     state.chapter = chapter
   },
