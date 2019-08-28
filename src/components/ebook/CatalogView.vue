@@ -174,7 +174,6 @@
           li {
             border-bottom: 1px solid rgba(0, 0, 0, .1);
             padding: px2rem(10);
-            transition: all .3s ease-in-out;
 
             span {
               line-height: px2rem(20);
