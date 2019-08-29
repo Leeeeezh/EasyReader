@@ -171,7 +171,7 @@
       },
       initBook() {
         //  加载图书资源
-        const url = `${process.env.VUE_APP_RES_URL}epub/` + this.fileName + '.epub'
+        const url = `${process.env.VUE_APP_RES_URL}/epub/` + this.fileName + '.epub'
         this.book = new Epub(url)
         this.setReadingBook(this.book)
         this.rendition = this.book.renderTo('read', {

@@ -13,7 +13,6 @@
   .shelf {
     width: 100%;
     height: 92vh;
-    background-color: pink;
   }
 
 </style>

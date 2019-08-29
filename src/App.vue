@@ -2,7 +2,7 @@
   <div id="app">
     <transition name="router-view-animation" mode="out-in">
       <keep-alive>
-        <router-view @back="console.log('ff')"></router-view>
+        <router-view></router-view>
       </keep-alive>
     </transition>
 
@@ -55,7 +55,8 @@
     position: relative;
 
     .btns {
-      box-shadow: 0 0 px2rem(10) rgba(0, 0, 0, .3);
+      border-top: 1px solid $shadow;
+      box-sizing: border-box;
       position: fixed;
       bottom: 0;
       left: 0;

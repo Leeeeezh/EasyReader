@@ -1,3 +1,4 @@
 export default {
-  view: state => state.view
+  view: state => state.view,
+  categoryMap: state => state.categoryMap
 }

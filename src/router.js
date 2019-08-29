@@ -23,7 +23,7 @@ export default new Router({
     },
     {
       path: '/detail/:bookName',
-       component: () => import('./views/detail/Index.vue')
+      component: () => import('./views/detail/Index.vue')
     },
     {
       path: '/shelf',

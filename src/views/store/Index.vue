@@ -1,10 +1,11 @@
 <template>
   <div class="store" @touchstart="onTouchStart($event)" @touchmove="onTouchMove($event)">
     <div class="title">
-      <Title :class="[fixTitle?'fixTitle':'unfixTitle',]"/>
+      <Title :class="[fixTitle?'fixTitle':'unfixTitle']" />
     </div>
-    <div class="content">
-      aa
+    <div class="content" ref="content">
+      <GuessYouLike :guessYouLikeData="storeData.guessYouLike" />
+      <Feature :featured="storeData.featured" />
     </div>
   </div>
 </template>
@@ -14,7 +15,13 @@
     // mapGetters,
     mapActions
   } from 'vuex'
+  import '@/mock/index.js'
+  import {
+    getStoreData
+  } from '@/api/store.js'
   import Title from '@/components/store/Title.vue'
+  import GuessYouLike from '@/components/store/GuessYouLike.vue'
+  import Feature from '@/components//store/Feature.vue'
   export default {
     methods: {
       ...mapActions(['setView']),
@@ -30,14 +37,24 @@
       }
     },
     components: {
-      Title
+      Title,
+      GuessYouLike,
+      Feature
     },
     data() {
       return {
         touchStartY: 0,
-        showTitle: true,
-        fixTitle: false
+        fixTitle: true,
+        storeData: {}
       }
+    },
+    mounted() {
+      getStoreData().then(res => {
+        if (res.status === 200) {
+          this.storeData = res.data
+          console.log(this.storeData)
+        }
+      })
     }
   }
 
@@ -49,11 +66,13 @@
     top: 0;
     left: 0;
   }
+
   .unfixTitle {
     position: fixed;
     left: 0;
     top: -8vh;
   }
+
   .store {
     width: 100%;
     height: 92vh;
@@ -61,7 +80,6 @@
 
     .content {
       width: 100%;
-      height: 200vh;
     }
 
     .title {
