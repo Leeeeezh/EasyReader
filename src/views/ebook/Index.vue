@@ -9,7 +9,9 @@
       <EbookMenu class="ebook-menu" v-show="menuVisibility" />
     </transition>
 
-    <EbookReader />
+    <keep-alive>
+      <EbookReader />
+    </keep-alive>
   </div>
 </template>
 <script>

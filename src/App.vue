@@ -21,12 +21,6 @@
           </router-link>
         </div>
 
-        <div class="icon-wrapper">
-          <router-link to="/ebook/LifeSciences|2016_Book_TechnologicalAndInstitutionalI" tag="div">
-            <span class="icon-book"></span>
-          </router-link>
-        </div>
-
       </div>
     </transition>
 
