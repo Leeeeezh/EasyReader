@@ -35,7 +35,7 @@
 <style lang="scss" scoped>
   .wrap {
     padding: 0 $screen-margin;
-
+    width: 100%;
     .feature {
       width: 100%;
 
@@ -45,7 +45,7 @@
         @include flex-center-row;
         justify-content: space-between;
         padding: px2rem(20) $screen-margin;
-        border-top: px2rem(10) solid #eee;
+        border-top: px2rem(2) solid #eee;
 
         .text {
           font-size: $font-size-lg;
@@ -55,47 +55,52 @@
 
       .content {
         width: 100%;
-        padding: $screen-margin;
+        font-size: $font-size-sm;
         @include flex-center-row;
         flex-wrap: wrap;
-
         .item {
-          flex-grow: 1;
-          width: 40vw;
-          @include flex-center-row;
-          .img {
-            width: 20vw;
+          width: 50%;
+          margin-bottom: px2rem(10);
 
+          @include flex-center-row;
+          align-items: stretch;
+          .img {
+
+            flex: 1;
             img {
-              width: 100%;
+              width:100%;
             }
           }
 
           .info {
-            padding-left: px2rem(4);
-            font-size: $font-size-sm;
-            height: 100%;
-            width: 40vw;
+            padding-left: px2rem(10);
+            align-self: stretch;
+            flex:3;
+            text-overflow: hidden;
+
             @include flex-center-col;
             justify-content: space-between;
+            align-items: flex-start;
+
             .book-name {
               font-weight: bold;
-              text-align: left;
-              height: 60%;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              line-clamp: 3;
             }
 
             .author {
-              text-align: left;
+              width: px2rem(120);
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              color: #666;
+              font-size: $font-size-xs;
             }
 
-            .category {}
+            .category {
+              color: #999;
+              font-size: $font-size-xs;
+            }
           }
         }
-
-
       }
     }
   }

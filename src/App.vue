@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <transition name="router-view-animation" mode="out-in">
+    <!-- <transition name="router-view-animation"> -->
       <keep-alive>
         <router-view></router-view>
       </keep-alive>
-    </transition>
+    <!-- </transition> -->
 
     <transition name="btns-animation">
       <div class="btns" v-show="$route.path==='/store'||$route.path==='/shelf'">
@@ -50,7 +50,6 @@
 <style lang="scss" scoped>
   #app {
     width: 100%;
-    height: 100%;
     overflow: hidden;
     position: relative;
 

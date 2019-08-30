@@ -78,11 +78,15 @@
         .item {
           border-bottom: 1px solid #eee;
 
+          &:active {
+            background-color: #eee;
+          }
+
           &:last-child {
             border-bottom: none;
           }
 
-          margin: px2rem(10) 0;
+          margin-top: px2rem(10) 0;
           height: px2rem(110);
           width: 100%;
           box-sizing: content-box;
@@ -119,6 +123,7 @@
 
             .author {
               text-align: left;
+              color: #444;
             }
           }
 

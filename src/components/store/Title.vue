@@ -1,6 +1,7 @@
 <template>
   <div class="wrap">
     <div class="title">
+      <div class="btn">书城</div>
 
       <div class="search">
         <div class="icon-wrapper">
@@ -12,7 +13,6 @@
           <input type="text" placeholder="搜索图书">
         </div>
       </div>
-      <div class="btn">搜索</div>
     </div>
   </div>
 </template>
@@ -38,7 +38,7 @@
     .title {
       font-size: $font-size-md;
       @include flex-center-row;
-      justify-content: space-around;
+      justify-content: space-between;
 
       .search {
         flex: 1;
@@ -56,7 +56,7 @@
           border: none;
           background-color: rgba(0, 0, 0, 0);
           margin-left: px2rem(10);
-          font-size: #fff;
+          font-size: $font-size-sm;
         }
       }
 

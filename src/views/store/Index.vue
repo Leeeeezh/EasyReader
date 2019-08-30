@@ -1,5 +1,5 @@
 <template>
-  <div class="store" @touchstart="onTouchStart($event)" @touchmove="onTouchMove($event)">
+  <div class="store" @touchstart="onTouchStart($event)" @touchmove="onTouchMove($event)" @touchend="onTouchEnd">
     <div class="title">
       <Title :class="[fixTitle?'fixTitle':'unfixTitle']" />
     </div>
@@ -34,6 +34,10 @@
         } else {
           this.fixTitle = false
         }
+      },
+      onTouchEnd() {
+        this.scrollTop = document.documentElement.scrollTop
+        console.dir(document.documentElement.scrollTop)
       }
     },
     components: {
@@ -45,7 +49,8 @@
       return {
         touchStartY: 0,
         fixTitle: true,
-        storeData: {}
+        storeData: {},
+        scrollTop: 0
       }
     },
     mounted() {
@@ -54,6 +59,11 @@
           this.storeData = res.data
           console.log(this.storeData)
         }
+      })
+    },
+    beforeRouteEnter (to, from, next) {
+      next(vm => {
+        document.documentElement.scrollTop = vm.scrollTop
       })
     }
   }
@@ -75,8 +85,9 @@
 
   .store {
     width: 100%;
-    height: 92vh;
-    overflow: scroll;
+    padding-bottom:8vh;
+    // height: 100vh;
+    // overflow: scroll;
 
     .content {
       width: 100%;

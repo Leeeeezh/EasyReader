@@ -19,7 +19,10 @@ export default new Router({
     },
     {
       path: '/store',
-      component: () => import('./views/store/Index.vue')
+      component: () => import('./views/store/Index.vue'),
+      meta: {
+        keepAlive: true // 需要缓存
+      }
     },
     {
       path: '/detail/:bookName',
