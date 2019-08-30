@@ -23,5 +23,6 @@ export default {
     '20': '政治与国际关系',
     '21': '心理学',
     '22': '统计学'
-  }
+  },
+  bookDetail: null
 }

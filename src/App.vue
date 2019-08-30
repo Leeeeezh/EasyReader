@@ -21,6 +21,12 @@
           </router-link>
         </div>
 
+        <div class="icon-wrapper">
+          <!-- <router-link to="/ebook/Laws|2015_Book_ProtectingTheRightsOfPeopleWit" tag="div"> -->
+            <span class="icon-book" @click="toRead"></span>
+          <!-- </router-link> -->
+        </div>
+
       </div>
     </transition>
 
@@ -37,7 +43,11 @@
       ...mapGetters(['view'])
     },
     methods: {
-      ...mapActions(['setView'])
+      ...mapActions(['setView']),
+      toRead() {
+        window.location.replace('http://localhost:8080/#/ebook/Laws|2015_Book_ProtectingTheRightsOfPeopleWit')
+        window.location.reload()
+      }
     }
   }
   document.addEventListener('DOMContentLoaded', () => {

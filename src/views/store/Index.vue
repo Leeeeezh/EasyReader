@@ -6,6 +6,7 @@
     <div class="content" ref="content">
       <GuessYouLike :guessYouLikeData="storeData.guessYouLike" />
       <Feature :featured="storeData.featured" />
+      <Category v-for="(c,i) in storeData.categoryList" :key="i" :categoryData="storeData.categoryList[i]"/>
     </div>
   </div>
 </template>
@@ -21,7 +22,8 @@
   } from '@/api/store.js'
   import Title from '@/components/store/Title.vue'
   import GuessYouLike from '@/components/store/GuessYouLike.vue'
-  import Feature from '@/components//store/Feature.vue'
+  import Feature from '@/components/store/Feature.vue'
+  import Category from '@/components/store/Category.vue'
   export default {
     methods: {
       ...mapActions(['setView']),
@@ -43,7 +45,8 @@
     components: {
       Title,
       GuessYouLike,
-      Feature
+      Feature,
+      Category
     },
     data() {
       return {

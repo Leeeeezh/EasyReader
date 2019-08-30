@@ -28,6 +28,7 @@
     <transition name="more">
       <More class="more" v-show="settingVisibility.more" />
     </transition>
+
     <transition name="mask">
       <ReaderMask v-show="settingVisibility.catalog" />
     </transition>
@@ -172,6 +173,7 @@
       initBook() {
         //  加载图书资源
         const url = `${process.env.VUE_APP_RES_URL}/epub/` + this.fileName + '.epub'
+        console.log()
         this.book = new Epub(url)
         this.setReadingBook(this.book)
         this.rendition = this.book.renderTo('read', {
@@ -306,7 +308,9 @@
       },
       initEpub() {
         this.initBook()
+        console.log(1)
         this.regFontFamily()
+        console.log(2)
         this.regTheme()
         this.initFontSize()
         this.initTheme()
@@ -315,7 +319,10 @@
         this.initGesture()
         this.getBookMetaInfo()
         //  显示图书
-        this.rendition.display()
+        this.rendition.display().then(() => {
+          console.log(this.rendition)
+        })
+        console.log('displayed')
       }
     },
     watch: {
@@ -329,9 +336,14 @@
     },
     mounted() {
       // 挂载后得到图书资源url
-      const fileName = this.$route.params.fileName.split('|').join('/')
-      this.setFileName(fileName).then(() => {
-        this.initEpub()
+      this.$nextTick(() => {
+        const fileName = this.$route.params.fileName.split('|').join('/')
+        console.log('fileName---', fileName)
+        this.setFileName(fileName).then(() => {
+          this.initEpub()
+          console.log('init')
+        })
+        console.log('EbookReader Mounted')
       })
     }
   }

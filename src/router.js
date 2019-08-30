@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   routes: [{
       path: '/',
       // redirect: '/ebook/LifeSciences|2016_Book_TechnologicalAndInstitutionalI'
@@ -14,7 +14,10 @@ export default new Router({
       component: () => import('./views/ebook/Index.vue'),
       children: [{
         path: ':fileName',
-        component: import('./components/ebook/EbookReader.vue')
+        component: () => import('./components/ebook/EbookReader.vue'),
+        meta: {
+          keepAlive: true
+        }
       }]
     },
     {
@@ -25,7 +28,7 @@ export default new Router({
       }
     },
     {
-      path: '/detail/:bookName',
+      path: '/store/book/:bookName',
       component: () => import('./views/detail/Index.vue')
     },
     {
@@ -34,3 +37,13 @@ export default new Router({
     }
   ]
 })
+
+// router.afterEach((to, from) => {
+//   console.log(to)
+
+//   if (to.path.startsWith('/ebook')) {
+//     window.location.reload()
+//   }
+// })
+
+export default router

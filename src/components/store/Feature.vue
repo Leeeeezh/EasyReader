@@ -3,7 +3,7 @@
     <div class="feature">
       <div class="title"><span class="text">精选</span></div>
       <div class="content">
-        <div class="item" v-for="(d,i) in featured" :key="i">
+        <div class="item" v-for="(d,i) in featured" :key="i" @click="navToDetail(d)">
           <div class="img"><img :src="d.cover"></div>
           <div class="info">
             <p class="book-name">{{d.title}}</p>
@@ -17,13 +17,22 @@
 </template>
 <script>
   import {
-    mapGetters
+    mapGetters,
+    mapActions
   } from 'vuex'
   export default {
     computed: {
       ...mapGetters(['categoryMap'])
     },
     props: ['featured'],
+    methods: {
+      ...mapActions(['setBookDetail']),
+      navToDetail(d) {
+        this.setBookDetail(d).then(() => {
+          this.$router.push(`/store/book/${d.fileName}`)
+        })
+      }
+    },
     watch: {
       feature() {
         console.log(this.featured)
@@ -36,6 +45,7 @@
   .wrap {
     padding: 0 $screen-margin;
     width: 100%;
+
     .feature {
       width: 100%;
 
@@ -44,7 +54,7 @@
         font-size: $font-size-md;
         @include flex-center-row;
         justify-content: space-between;
-        padding: px2rem(20) $screen-margin;
+        padding: px2rem(30) $screen-margin;
         border-top: px2rem(2) solid #eee;
 
         .text {
@@ -58,24 +68,27 @@
         font-size: $font-size-sm;
         @include flex-center-row;
         flex-wrap: wrap;
+
         .item {
           width: 50%;
           margin-bottom: px2rem(10);
 
           @include flex-center-row;
           align-items: stretch;
+
           .img {
 
             flex: 1;
+
             img {
-              width:100%;
+              width: 100%;
             }
           }
 
           .info {
             padding-left: px2rem(10);
             align-self: stretch;
-            flex:3;
+            flex: 3;
             text-overflow: hidden;
 
             @include flex-center-col;

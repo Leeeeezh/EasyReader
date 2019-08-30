@@ -6,7 +6,7 @@
         <span class="change" @click="change">换一批</span>
       </div>
       <div class="content">
-        <div class="item" v-for="(d,i) in guess" :key="i">
+        <div class="item" v-for="(d,i) in guess" :key="i" @click="navToDetail(d)">
           <div class="img">
             <img :src="d.cover">
           </div>
@@ -24,6 +24,10 @@
   import {
     randomChoose
   } from '@/utils/util.js'
+  import {
+    // mapGetters,
+    mapActions
+  } from 'vuex'
   export default {
     data() {
       return {
@@ -32,6 +36,12 @@
     },
     props: ['guessYouLikeData'],
     methods: {
+      ...mapActions(['setBookDetail']),
+      navToDetail(d) {
+        this.setBookDetail(d).then(() => {
+          this.$router.push(`/store/book/${d.fileName}`)
+        })
+      },
       change() {
         this.guess = randomChoose(this.guessYouLikeData, 3)
       }
